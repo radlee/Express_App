@@ -1,0 +1,137 @@
+
+body{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color:#fff;
+  	background-color:#333;
+  	font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
+}
+/*Enable this to minimize the size of the input*/
+/*.divMan{
+  width: 50%;
+}*/
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+@import url(http://fonts.googleapis.com/css?family=Doppio+One);
+
+a:link, a:visited {
+	color:black;
+}
+.jumbotron{
+  height: 100%;
+}
+#container{
+  padding: 10px;
+}
+#info{
+  background-color: #02cab6;
+}
+h2 {
+  color : gray;
+  foont-size: .8em;
+  background-color: #02cab6;
+}
+#heading{
+  text-align: center;
+  font-family: sans-serif;
+  color : red;
+}
+#Heading{
+  text-align: center;
+  font-family: sans-serif;
+  color : red;
+}
+#heading2{
+  font-family: sans-serif;
+  background-color: green;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+.para {
+  font-family: sans-serif;
+}
+/*#csricodexmlab{*/
+  /*background-color: #044052;*/
+  /*background-color: black;*/
+  /*color: white;*/
+/*}*/
+table {
+  /*border-collapse: collapse;*/
+  background-color: :#333 !important;
+  font-family: sans-serif;
+  text-align: left;
+  padding: 10px;
+  color: white;
+}
+.info{
+  background-color: #044052 !important;
+}
+
+td{
+  background-color: #044052;
+  color: #00adc8;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  /*background-color:#33ccff;*/
+  background-color:#990033;
+  color: white ;
+}
+#output{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.navbar .brand {
+max-height: 70px;
+overflow: visible;
+padding-top: 0;
+padding-bottom: 0;
+}
+.navbar a.navbar-brand {padding: 0px 15px 0px;}
+
+@media only screen and (max-width : 620px) {
+  body {
+    /*background-color: #1c1c1c !important;*/
+  }
+  #Heading{
+    color: white;
+  }
+  td{
+    background-color: white;
+    color: grey;
+  }
+  .info{
+    background-color: white !important;
+    color: grey;
+  }
+  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    /*background-color:#33ccff;*/
+    background-color:#990033;
+    color: black ;
+  }
+
+}
+@media only screen and (max-width: 620px) {
+ .nav-collapse, .nav-collapse.collapse {
+   overflow: visible !important;
+   height: auto !important;
+ }
+ .navbar .btn-navbar {
+   display:none;
+ }
+
+ .dropdown-menu li:hover .sub-menu {
+   display: block !important;
+   visibility: visible !important;
+ }
+ #Heading{
+   color: black;
+ }
+}

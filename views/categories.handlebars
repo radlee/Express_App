@@ -1,0 +1,47 @@
+<div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron" >
+  <h1 class="margin">Categories</h1>
+</div>
+<!-- <div class="container">
+  <img class="img-responsive" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/24d1b840619873.57b2ad3cef0f2.png" alt="NS">
+</div> -->
+
+<div id="output">
+  <p>
+    <a style="color:white" class="btn btn-success btn-lg" href="/categories/add">
+      <span class="glyphicon glyphicon-plus"></span> Add a Category
+    </a>
+  </p>
+
+  <div>
+    <table style="width:100%" class="table table-hover">
+      <thead>
+      <tr id="Heading">
+        <!-- <th>Main ID Number</th> -->
+        <th>Category Name</th>
+        <th>Edit Category</th>
+        <th>Delete Category</th>
+      </tr>
+    </thead>
+      <tr>
+        {{#categories}}
+        <!-- <th id="des" class="info">ID# : {{id}}</th> -->
+        <th id="des" class="info">{{Category}}</th>
+        <td class="para"><strong><span style="color:#00adc8">
+          <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        </a></span></strong>
+        </td>
+
+        <td class="para"><a type="button" class="btn btn-danger" href="/categories/delete/{{id}}">
+        <span class="glyphicon glyphicon-trash"></span> Delete
+      </a>
+        </td>
+      </tr>{{/categories}}
+    </table>
+  </div>
+</div>
+
+
+{{#no_products}}
+  <p>No products available yet. Add some above.</p>
+{{/no_products}}

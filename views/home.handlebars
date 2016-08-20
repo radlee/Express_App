@@ -1,0 +1,43 @@
+<div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
+  <h1 class="margin">Products</h1>
+</div>
+
+<div id="output">
+  <p>
+    <a style="color:white" class="btn btn-success btn-lg" href="/products/add">
+      <span class="glyphicon glyphicon-plus"></span> Add a Product
+    </a>
+  </p>
+
+  <div>
+    <table style="width:100%" class="table table-hover">
+      <thead>
+      <tr id="Heading">
+        <!-- <th>Main ID Number</th> -->
+        <th>Product Name</th>
+        <th>Category ID Number</th>
+        <th>Edit Product</th>
+        <th>Delete Product</th>
+      </tr>
+    </thead>
+      <tr>
+        {{#products}}
+        <!-- <th id="des" class="info"><span style="color:#ffb900">ID#</span> : {{id}}</th> -->
+
+        <th id="des" class="info">{{Product}}</th>
+        <th id="des" class="info"><span style="color:#ffb900">Category ID#</span> : {{CategoryID}}</th>
+        <td class="para"><strong><span style="color:#00adc8"><a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}">
+      <span class="glyphicon glyphicon-edit"></span> Edit
+    </a></span></strong></td>
+
+        <td class="para"><a type="button" class="btn btn-danger" href="/products/delete/{{id}}">
+      <span class="glyphicon glyphicon-trash"></span> Delete
+    </a></td>
+      </tr>{{/products}}
+    </table>
+  </div>
+</div>
+
+{{#no_products}}
+  <p>No products available yet. Add some above.</p>
+{{/no_products}}
