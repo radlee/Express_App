@@ -1,6 +1,6 @@
-# Neisa Spaza Application
+# Nelisa Spaza Application
 
-Welcome to Nelisa Spaza App. You can View this app by going to lolito.projectcodex.co
+Welcome to Nelisa Spaza App. You can View this app by going to 	`http://www.lolito.projectcodex.co`
 
 # Functionality
 
