@@ -87,7 +87,6 @@ td{
   padding-right: 20px;
 }
 
-
 .navbar .brand {
 max-height: 70px;
 overflow: visible;
@@ -119,6 +118,10 @@ padding-bottom: 0;
 
 }
 @media only screen and (max-width: 620px) {
+  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color:#e2e2eb;
+    color: black ;
+  }
  .nav-collapse, .nav-collapse.collapse {
    overflow: visible !important;
    height: auto !important;

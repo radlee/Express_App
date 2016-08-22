@@ -49,7 +49,9 @@ app.post('/categories/add', categories.add);
 app.get('/categories/delete/:id', categories.delete);
 
 
-app.get('/', products.show);
+app.get('/', function(req, res){
+    res.render( "home")
+});
 app.get('/products', products.show);
 app.get('/products/edit/:id', products.get);
 app.post('/products/update/:id', products.update);

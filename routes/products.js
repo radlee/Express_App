@@ -9,9 +9,9 @@
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query('SELECT * from Products', [], function(err, results) {
+		connection.query('SELECT Products.id, Products.Product, Categories.Category from Products inner join Categories on Products.CategoryID = Categories.id', [], function(err, results) {
         	if (err) return next(err);
-    		res.render( 'home', {
+    		res.render( 'products', {
 					no_products : results.length === 0,
 					products : results,
     		});
