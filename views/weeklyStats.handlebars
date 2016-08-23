@@ -1,40 +1,45 @@
 <style>
 @import url('http://fonts.googleapis.com/css?family=Asap');
-#des{
-  padding-left: 20px;
+#des {
+    padding-left: 20px;
 }
-@media only screen and (max-width : 578px) {
-  #heading1 {
-    font-size: 25px;
-  }
+
+@media only screen and (max-width: 578px) {
+    #heading1 {
+        font-size: 25px;
+    }
 }
 </style>
-<div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a25bb140619873.578653a2b34a9.png); background-size: 100%;">
-  <h1 class="margin" id="heading1" ><span style="color:lightblue">{{week}}</span> Sales Statistics</h1>
-  <br>
-  <div class="row">
-    <div class="col-sm-4">
+<div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/24d1b840619873.57b2ad3cef0f2.png); background-size: 100%;">
+    <h1 class="margin" id="heading1"><span style="color:lightblue">{{week}}</span> <span style="color: white">Sales Statistics</span></h1>
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+        </div>
     </div>
-    <div class="col-sm-4">
-    </div>
-    <div class="col-sm-4">
-    </div>
-  </div>
 </div>
 
 <div id="output">
-  <div>
-    <table style="width:100%" class="table table-hover">
-      <tr>
-        {{#key}}<th id="des" class="info">{{Description}}</th>
-        <td class="para"><strong><span style="color:#00adc8">{{Item}} {{Category}}</span></strong></td>
-        {{#if Profit}}
-        <th class="info"><span style="color:#059407">Profit</span></th>
-        {{else}}
-        <th class="info">Quantity</th>
-        {{/if}}
-        <td class="para">{{Quantity}} {{Profit}}</td>
-      </tr>{{/key}}
-    </table>
-  </div>
+    <div>
+        <table style="width:100%" class="table table-hover">
+            <tr>
+                {{#key}}
+                    <th id="des" class="info">{{Description}}</th>
+                    <td class="para"><strong><span style="color:#00adc8">{{Item}} {{Category}}</span></strong></td>
+                    {{#if Profit}}
+                        <th class="info">
+                            <span style="color:#059407">Profit</span>
+                        </th>
+                    {{else}}
+                        <th class="info">Quantity</th>
+                    {{/if}}
+                    <td class="para">{{Quantity}} {{Profit}}</td>
+            </tr>
+            {{/key}}
+        </table>
+    </div>
 </div>

@@ -8,6 +8,9 @@ body{
   	background-color:#333;
   	font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
 }
+.form-horizontal{
+  width: 800px;
+}
 /*Enable this to minimize the size of the input*/
 /*.divMan{
   width: 50%;

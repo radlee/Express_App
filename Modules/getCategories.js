@@ -72,7 +72,7 @@ module.exports = function(theList){
       categories.push(food);
     }
     else if(item.Item == "Bread"){
-      var food = {Category : "Food", Item : item.Item, Date : item.Date, Quantity : item.Quantity, Price : item.Price}
+      var food = {Category : "Bakey", Item : item.Item, Date : item.Date, Quantity : item.Quantity, Price : item.Price}
       categories.push(food);
     }
     else if(item.Item == "Soap Bar"){

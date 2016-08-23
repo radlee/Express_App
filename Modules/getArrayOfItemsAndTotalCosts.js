@@ -73,13 +73,13 @@ objArray.forEach(function(item){
       weekl4Purchases.push(result)
     }
 })
-console.log("\nWeek 1 -- > \n");
-console.log(weekl1Purchases)
-console.log("\nWeek 2 -- > \n");
-console.log(weekl2Purchases)
-console.log("\nWeek 3 -- > \n");
-console.log(weekl3Purchases)
-console.log("\nWeek 4 -- > \n");
-console.log(weekl4Purchases)
+// console.log("\nWeek 1 -- > \n");
+// console.log(weekl1Purchases)
+// console.log("\nWeek 2 -- > \n");
+// console.log(weekl2Purchases)
+// console.log("\nWeek 3 -- > \n");
+// console.log(weekl3Purchases)
+// console.log("\nWeek 4 -- > \n");
+// console.log(weekl4Purchases)
 
-console.log(weekl1Purchases.length + weekl2Purchases.length + weekl3Purchases.length + weekl4Purchases.length);
+// console.log(weekl1Purchases.length + weekl2Purchases.length + weekl3Purchases.length + weekl4Purchases.length);

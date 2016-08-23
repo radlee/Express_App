@@ -3,14 +3,47 @@
 var express = require('express'),
     exphbs  = require('express-handlebars'),
     mysql = require('mysql'),
+    session = require('express-session'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
     categories = require('./routes/categories'),
     products = require('./routes/products'),
     sales = require('./routes/sales'),
-    purchases = require('./routes/purchases');
+    login = require('./routes/login'),
+    purchases = require('./routes/purchases'),
+    app = express();
 
-var app = express();
+
+    var readAndMakeObjects = require("./Modules/readAndMakeObjects");
+    var getMostPopularProduct = require("./Modules/getMostPopularProduct");
+    var getLeastPopularProduct = require("./Modules/getLeastPopularProduct");
+    var getMostPopularCategory = require("./Modules/getMostPopularCategory");
+    var getLeastPopularCategory = require("./Modules/getLeastPopularCategory");
+    var getMostProfitableCategory = require("./Modules/getMostProfitableCategory");
+    var getMostProfitableProduct = require("./Modules/getMostProfitableProduct");
+    var getArrayOfItemsAndProfits = require("./Modules/getArrayOfItemsAndProfits");
+    var getCategories = require("./Modules/getCategories");
+    var getSales = require("./Modules/getSales");
+    var getCosts = require("./Modules/getCosts");
+    var getProductNamesAndCategoryNames = require("./Modules/getProductNamesAndCategoryNames");
+
+    var weeklyStats = function(weekPath, purchasesPath){
+      var listOfObjects = readAndMakeObjects(weekPath);
+      // Weekly Sales and Weekly Purchases Lists Of Objects ----
+      var objArray1 = getSales(weekPath);
+      var objArray2 = getCosts(purchasesPath);
+      var arrayOfProfits = getArrayOfItemsAndProfits(objArray1, objArray2);
+      var mostPopularCategory = getMostPopularCategory(listOfObjects);
+      var mostPopularProduct = getMostPopularProduct(listOfObjects);
+      var leastPopularProduct = getLeastPopularProduct(listOfObjects);
+      var leastPopularCategory = getLeastPopularCategory(listOfObjects);
+      var mostProfitableProduct = getMostProfitableProduct(objArray1, objArray2);
+      var mostProfitableCategory = getMostProfitableCategory(arrayOfProfits);
+      var arrayOfCategories = getCategories(listOfObjects);
+
+      return [mostPopularProduct, leastPopularProduct, mostPopularCategory, leastPopularCategory, mostProfitableProduct, mostProfitableCategory];
+    }
+
 
 var dbOptions = {
       host: 'localhost',
@@ -19,6 +52,30 @@ var dbOptions = {
       port: 3306,
       database: 'Nelisa'
 };
+
+// in a route
+app.get("/users", function(req, res){
+    // req.session will be defined now
+    if (!req.session.user){
+        //set a session value from a form variable
+        req.session.user = req.body.username;
+    }
+});
+
+
+app.get('/sales/:week_name', function(req, res){
+  var weekname = req.params.week_name;
+  var weeklyFile = "./files/"  + weekname +".csv";
+  var data = weeklyStats(weeklyFile, "./files/purchases.csv");
+    res.render( "weeklyStats", {key : data , week : weekname});
+});
+
+//set up HttpSession middleware
+app.use(session({
+    secret: 'put your secret phrase here please',
+    cookie: { maxAge: 60000 }
+}));
+
 
 //setup template handlebars as the template engine
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -39,6 +96,8 @@ function errorHandler(err, req, res, next) {
 }
 
 //setup the handlers
+
+
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
@@ -77,6 +136,9 @@ app.post('/purchases/update/:id', purchases.update);
 app.post('/purchases/add', purchases.add);
 // //this should be a post but this is only an illustration of CRUD - not on good practices
 app.get('/purchases/delete/:id', purchases.delete);
+app.get('/login', login.checkUser);
+// create a new middleware component------------------------------------------
+
 
 
 app.use(errorHandler);
