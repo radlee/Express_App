@@ -9,8 +9,11 @@ body{
   	font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
 }
 ul.nav a:hover { color: #cddede !important;
-  background-color: lightblue;
+  background-color: black !important;
 
+}
+
+.navbar-nav > li > .dropdown-menu { background-color: #044052;
 }
 
 /*.nav > li > a:hover{
