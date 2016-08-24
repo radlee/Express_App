@@ -9,6 +9,7 @@ var express = require('express'),
     categories = require('./routes/categories'),
     products = require('./routes/products'),
     sales = require('./routes/sales'),
+    // weeklyData = require('./routes/getWeeklyData'),
     // login = require('./routes/login'),
     purchases = require('./routes/purchases'),
     app = express();
@@ -44,7 +45,7 @@ var express = require('express'),
       return [mostPopularProduct, leastPopularProduct, mostPopularCategory, leastPopularCategory, mostProfitableProduct, mostProfitableCategory];
     }
 
-
+// console.log(weeklyData);
 var dbOptions = {
       host: 'localhost',
       user: 'root',
@@ -55,7 +56,7 @@ var dbOptions = {
 
 // in a route
 // app.get("/users", function(req, res){
-//     // req.session will be defined now
+//     // req.session will be defined nowsales
 //     if (!req.session.user){
 //         //set a session value from a form variable
 //         req.session.user = req.body.username;
@@ -63,8 +64,9 @@ var dbOptions = {
 // });
 
 
-app.get('/sales/:week_name', function(req, res){
+app.get('/Sales/:week_name', function(req, res){
   var weekname = req.params.week_name;
+  console.log(weekname);
   var weeklyFile = "./files/"  + weekname +".csv";
   var data = weeklyStats(weeklyFile, "./files/purchases.csv");
     res.render( "weeklyStats", {key : data , week : weekname});

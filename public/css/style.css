@@ -8,13 +8,29 @@ body{
   	background-color:#333;
   	font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
 }
+ul.nav a:hover { color: #cddede !important;
+  background-color: lightblue;
+
+}
+
+/*.nav > li > a:hover{
+    background-color:#FCC;
+}*/
+
 .form-horizontal{
   width: 800px;
 }
-/*Enable this to minimize the size of the input*/
-/*.divMan{
-  width: 50%;
-}*/
+a{
+  color: white !important;
+}
+
+.navbar-inverse {
+background-color:  #044052  !important;
+border-color: #006687;
+color: white !important;
+}
+
+
 .navbar-brand>img {
   height: 100%;
   padding: 15px;
@@ -44,11 +60,14 @@ h2 {
   font-family: sans-serif;
   color : red;
 }
+
 #Heading{
   text-align: center;
   font-family: sans-serif;
-  color : red;
+  color : white;
+  background-color: #008080;
 }
+
 #heading2{
   font-family: sans-serif;
   background-color: green;
@@ -59,13 +78,8 @@ h2 {
 .para {
   font-family: sans-serif;
 }
-/*#csricodexmlab{*/
-  /*background-color: #044052;*/
-  /*background-color: black;*/
-  /*color: white;*/
-/*}*/
+
 table {
-  /*border-collapse: collapse;*/
   background-color: :#333 !important;
   font-family: sans-serif;
   text-align: left;
@@ -81,14 +95,9 @@ td{
   color: #00adc8;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  /*background-color:#33ccff;*/
   background-color:#990033;
-  color: white ;
 }
-#output{
-  padding-left: 20px;
-  padding-right: 20px;
-}
+
 
 .navbar .brand {
 max-height: 70px;
@@ -99,9 +108,7 @@ padding-bottom: 0;
 .navbar a.navbar-brand {padding: 0px 15px 0px;}
 
 @media only screen and (max-width : 620px) {
-  body {
-    /*background-color: #1c1c1c !important;*/
-  }
+
   #Heading{
     color: white;
   }
@@ -125,6 +132,10 @@ padding-bottom: 0;
     background-color:#e2e2eb;
     color: black ;
   }
+  ul.nav a:hover { color: lightblue !important;
+    background-color: black !important;
+
+  }
  .nav-collapse, .nav-collapse.collapse {
    overflow: visible !important;
    height: auto !important;
@@ -136,6 +147,7 @@ padding-bottom: 0;
  .dropdown-menu li:hover .sub-menu {
    display: block !important;
    visibility: visible !important;
+
  }
  #Heading{
    color: black;
