@@ -13,18 +13,24 @@
   </p>
 
   <div>
-    <table style="width:100%" class="table table-hover">
+    <div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="What you looking for?">
+    </div>
+    <span class="counter pull-right"></span>
+
+    <table style="width:100%" class="table table-hover results">
       <thead>
       <tr id="Heading">
-        <!-- <th>Main ID Number</th> -->
         <th>Category Name</th>
         <th>Edit Category</th>
         <th>Delete Category</th>
       </tr>
+      <tr class="warning no-result">
+        <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+      </tr>
     </thead>
       <tr>
         {{#categories}}
-        <!-- <th id="des" class="info">ID# : {{id}}</th> -->
         <th id="des" class="info">{{Category}}</th>
         <td class="para"><strong><span style="color:#00adc8">
           <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">

@@ -10,7 +10,11 @@
   </p>
 
   <div>
-    <table style="width:100%" class="table table-hover">
+    <div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="What you looking for?">
+    </div>
+    <span class="counter pull-right"></span>
+    <table style="width:100%" class="table table-hover results">
       <thead>
       <tr id="Heading">
         <!-- <th>Main ID Number</th> -->
@@ -20,6 +24,9 @@
         <th>Product ID Number</th>
         <th>Edit</th>
         <th>Delete</th>
+      </tr>
+      <tr class="warning no-result">
+        <td colspan="4"><i class="fa fa-warning"></i> No result</td>
       </tr>
     </thead>
       <tr>

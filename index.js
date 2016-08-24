@@ -9,7 +9,7 @@ var express = require('express'),
     categories = require('./routes/categories'),
     products = require('./routes/products'),
     sales = require('./routes/sales'),
-    login = require('./routes/login'),
+    // login = require('./routes/login'),
     purchases = require('./routes/purchases'),
     app = express();
 
@@ -54,13 +54,13 @@ var dbOptions = {
 };
 
 // in a route
-app.get("/users", function(req, res){
-    // req.session will be defined now
-    if (!req.session.user){
-        //set a session value from a form variable
-        req.session.user = req.body.username;
-    }
-});
+// app.get("/users", function(req, res){
+//     // req.session will be defined now
+//     if (!req.session.user){
+//         //set a session value from a form variable
+//         req.session.user = req.body.username;
+//     }
+// });
 
 
 app.get('/sales/:week_name', function(req, res){
@@ -136,7 +136,7 @@ app.post('/purchases/update/:id', purchases.update);
 app.post('/purchases/add', purchases.add);
 // //this should be a post but this is only an illustration of CRUD - not on good practices
 app.get('/purchases/delete/:id', purchases.delete);
-app.get('/login', login.checkUser);
+// app.get('/login', login.checkUser);
 // create a new middleware component------------------------------------------
 
 
