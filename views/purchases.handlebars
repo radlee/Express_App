@@ -11,7 +11,7 @@
 
     <div>
         <div class="form-group pull-right">
-            <input type="text" class="search form-control" placeholder="What you looking for?">
+            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
         </div>
         <span class="counter pull-right"></span>
         <table style="width:100%" class="table table-hover results">
@@ -22,9 +22,9 @@
                     <th>Date</th>
                     <th>Quantity</th>
                     <th>Cost Per Item</th>
-                    <th>Product ID Number</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Product Name</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <tr class="warning no-result">
                     <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -38,7 +38,7 @@
                     <th id="des" class="info">{{Quantity}}</th>
                     <th id="des" class="info">R {{CostPerItem}}</th>
                     <th id="des" class="info">
-                        <span style="color:#ffb900">Product ID#</span> : {{ProductID}}</th>
+                        <span style="color:#ffb900">{{Product}}</span></th>
                     <td class="para"><strong><span style="color:#00adc8">
           <a type="button" class="btn btn-warning" href="/purchases/edit/{{id}}">
           <span class="glyphicon glyphicon-edit"></span> Edit
@@ -58,5 +58,5 @@
 
 
 {{#no_products}}
-    <p>No products available yet. Add some above.</p>
+    <p>No purchases available yet. Add some above.</p>
 {{/no_products}}

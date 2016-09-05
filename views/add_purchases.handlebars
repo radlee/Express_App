@@ -1,27 +1,27 @@
-<h1>Add Purchase</h1>
+<h1 class="form_text">Add Purchase</h1>
 <div class="divMan">
 
 
-	<form role="form" action="/purchases/add" method="POST">
+	<form class="form_text" role="form" action="/purchases/add" method="POST">
 		<div class="form-group">
 			<label for="">Supplier</label>
-			<input type="text" class="form-control" name="Category" value="{{Shop}}">
+			<input type="text" class="form-control" name="Shop" value="{{Shop}}">
 		</div>
 		<div class="form-group">
 			<label for="des">Date</label>
-			<input type="text" class="form-control" name="Category" value="{{Date}}">
+			<input type="text" class="form-control" name="Date" value="{{Date}}">
 		</div>
 		<div class="form-group">
 			<label for="des">Quantity</label>
-			<input type="text" class="form-control" name="Category" value="{{Quantity}}">
+			<input type="text" class="form-control" name="Quantity" value="{{Quantity}}">
 		</div>
 		<div class="form-group">
 			<label for="des">Cost Per Item</label>
-			<input type="text" class="form-control" name="Category" value="{{CostPerItem}}">
+			<input type="text" class="form-control" name="CostPerItem" value="{{CostPerItem}}">
 		</div>
 		<div class="form-group">
 			<label for="des">Product ID</label>
-			<input type="text" class="form-control" name="Category" value="{{ProductID}}">
+			<input type="text" class="form-control" name="ProductID" value="{{ProductID}}">
 		</div>
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form>

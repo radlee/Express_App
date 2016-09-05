@@ -6,7 +6,7 @@
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query('SELECT * from Purchases', [], function(err, results) {
+		connection.query('select Purchases.id, Purchases.Shop, Purchases.Date, Purchases.Quantity, Purchases.CostPerItem, Products.Product from Purchases inner join Products on Purchases.ProductID = Products.id', [], function(err, results) {
         if (err) return next(err);
 		res.render( 'purchases', {
 				no_products : results.length === 0,
@@ -23,7 +23,8 @@ exports.showAdd = function(req, res){
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		var input = req.body;
+		var input = req.body
+		console.log(input);
 		var data = {
 			Shop : input.Shop,
 			Date : input.Date,

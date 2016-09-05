@@ -6,9 +6,3 @@ exports.checkUser = function(req, res, next){
   // the user is not logged in redirect them to the login page
   res.redirect('/login');
 };
-
-
-app.get('/users', checkUser, function(req, res){
-  var userData = userService.getUserData();
-  res.render('/users', userData)
-});

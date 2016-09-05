@@ -1,11 +1,3 @@
-
-/***
- * A very basic CRUD example using MySQL
- */
-
- // SELECT Products.Product, Categories.Category from Products inner join Categories on Products.CategoryID = Categories.id
-
-
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
@@ -39,6 +31,8 @@ exports.add = function (req, res, next) {
       		Product : req.body.Product
 			// Price : Number(req.body.Price)
   		};
+			console.log("Data added ");
+			console.log(data);
 
 		connection.query('insert into Products set ?', data, function(err, results) {
   			if (err) return next(err);
@@ -86,9 +80,14 @@ exports.update = function(req, res, next){
 };
 
 exports.delete = function(req, res, next){
+	var ids = [];
 	var id = req.params.id;
+	console.log("Deleted by this id ");
+	ids.push(id);
+	console.log(ids);
+
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM Products WHERE id = ?', [id], function(err,rows){
+		connection.query('DELETE FROM Products WHERE id = ?', [ids], function(err,rows){
 			if(err) return next(err);
 			res.redirect('/products');
 		});

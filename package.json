@@ -1,7 +1,7 @@
 {
-  "name": "codeX_BasicCRUDexample",
+  "name": "express_app",
   "version": "0.0.0",
-  "description": "",
+  "description": "Welcome to Nelisa Spaza App. You can View this app by going to \t`http://www.lolito.projectcodex.co`",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,14 @@
     "express-myconnection": "^1.0.4",
     "mysql": "^2.5.3",
     "prompt": "^0.2.14"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radlee/Express_App.git"
+  },
+  "bugs": {
+    "url": "https://github.com/radlee/Express_App/issues"
+  },
+  "homepage": "https://github.com/radlee/Express_App#readme"
 }

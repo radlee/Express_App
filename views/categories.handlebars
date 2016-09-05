@@ -6,7 +6,7 @@
 </div> -->
 
 <div id="output">
-  <p>
+  <p class="buttons_mobile">
     <a style="color:white" class="btn btn-success btn-lg" href="/categories/add">
       <span class="glyphicon glyphicon-plus"></span> Add a Category
     </a>
@@ -14,7 +14,7 @@
 
   <div>
     <div class="form-group pull-right">
-        <input type="text" class="search form-control" placeholder="What you looking for?">
+        <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
     </div>
     <span class="counter pull-right"></span>
 
@@ -23,7 +23,11 @@
       <tr id="Heading">
         <th>Category Name</th>
         <th>Edit Category</th>
-        <th>Delete Category</th>
+        <th><a id="button" class=btn name=submit value=Login type=submit  onclick="checkBoxDemo()" >
+          <span class="glyphicon glyphicon-trash"></span> Delete selected
+        </a>
+        <P><INPUT class=btn name=submit value=Login type=submit  onclick="checkBoxDemo()"></P>
+      </th>
       </tr>
       <tr class="warning no-result">
         <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -31,23 +35,76 @@
     </thead>
       <tr>
         {{#categories}}
-        <th id="des" class="info">{{Category}}</th>
+        <th value="{{id}}" class="info">{{Category}}</th>
         <td class="para"><strong><span style="color:#00adc8">
           <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">
           <span class="glyphicon glyphicon-edit"></span> Edit
         </a></span></strong>
         </td>
 
-        <td class="para"><a type="button" class="btn btn-danger" href="/categories/delete/{{id}}">
-        <span class="glyphicon glyphicon-trash"></span> Delete
-      </a>
+
+        <td class="para">
+          <div class="checkbox">
+              <label>
+                  <input id="checked" class="value" type="checkbox" value="{{id}}">
+                  <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+              </label>
+          </div>
         </td>
       </tr>{{/categories}}
     </table>
   </div>
 </div>
 
+<!-- Scrip for when box is checked it deletes what is checked only  -->
+<script type="text/javascript">
 
-{{#no_products}}
-  <p>No products available yet. Add some above.</p>
-{{/no_products}}
+function checkBoxDemo() {
+if(document.getElementById('checked').checked) {
+alert("hh");
+}
+
+
+
+
+
+//
+// var btn = document.getElementById("button");
+// btn.onclick = function(){
+//
+//   alert(this.id);
+// };
+// function validate() {
+//        if (document.getElementById('checked').checked) {
+//            alert("checked");
+//        } else {
+//            alert("You didn't check it! Let me check it for you.");
+//        }
+//    }
+
+
+
+
+// var x = document.getElementById('checked');
+// x.checked = function(){
+//   alert(this.id)
+// }
+// var btn = document.getElementById("button");
+// btn.onclick = function(){
+//
+//   alert(this.id);
+// };
+
+// $(document).ready(function() {
+//   $("checked").checked(function () {
+//     var list = [];
+//     var checkedOne = $("checked").val('value');
+//     list.push(checkedOne);
+//     alert(list);
+//     }
+// });
+</script>
+
+{{#no_categories}}
+  <p>No categories available yet. Add some above.</p>
+{{/no_categories}}

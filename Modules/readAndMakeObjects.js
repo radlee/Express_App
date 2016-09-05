@@ -1,7 +1,6 @@
-module.exports = function(file, path){
+module.exports = function(file){
   var fs = require('fs');
   var data = fs.readFileSync(file, 'utf8');
-  // var fileNames = fs.readdirSync(path);
   var listOfSplittedLines = data.split("\n").splice(1).filter(Boolean);
   var list =[];
   var listOfObjs = [];
@@ -9,7 +8,6 @@ module.exports = function(file, path){
     var splittedLine = line.split(",");
     list.push(splittedLine);
     var result = {
-      // Day : splittedLine[0],
       Date : splittedLine[1],
       Item : splittedLine[2],
       Quantity : Number(splittedLine[3]),

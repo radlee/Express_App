@@ -6,10 +6,10 @@
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query('SELECT * from Sales', [], function(err, results) {
+		connection.query('select Sales.id, Sales.Date, Sales.Quantity, Sales.Price, Products.Product from Sales inner join Products on Sales.ProductID = Products.id', [], function(err, results) {
         if (err) return next(err);
 		res.render( 'sales', {
-				no_products : results.length === 0,
+				no_sales : results.length === 0,
 				sales : results,
 		});
       });
@@ -43,7 +43,7 @@ exports.add = function (req, res, next) {
 exports.get = function(req, res, next){
 	var id = req.params.id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM sales WHERE id = ?', [id], function(err,rows){
+		connection.query('SELECT * FROM Sales WHERE id = ?', [id], function(err,rows){
 			if(err) return next(err);
 			res.render('edit_sales',{page_title:"Edit Customers - Node.js", data : rows[0]});
 		});
@@ -55,7 +55,7 @@ exports.update = function(req, res, next){
   var data = req.body;
   var id = req.params.id;
   req.getConnection(function(err, connection){
-			connection.query('UPDATE sales SET ? WHERE id = ?', [data, id], function(err, rows){
+			connection.query('UPDATE Sales SET ? WHERE id = ?', [data, id], function(err, rows){
     			if (err) next(err);
           		res.redirect('/sales');
     		});
@@ -66,7 +66,7 @@ exports.update = function(req, res, next){
 exports.delete = function(req, res, next){
 	var id = req.params.id;
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM sales WHERE id = ?', [id], function(err,rows){
+		connection.query('DELETE FROM Sales WHERE id = ?', [id], function(err,rows){
 			if(err) return next(err);
 			res.redirect('/sales');
 		});

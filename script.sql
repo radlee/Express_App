@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS Sales;
 DROP TABLE IF EXISTS Purchases;
+DROP TABLE IF EXISTS Users;
 SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE Categories(
@@ -39,3 +40,9 @@ CREATE TABLE Purchases(
   ProductID INT,
   FOREIGN KEY (ProductID) REFERENCES Products (id)
 );
+CREATE TABLE Users(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  Username char(100) NOT NULL,
+  Password char(100) NOT NULL
+);
+INSERT INTO Users (Username,Password) VALUES ("lee", "123");

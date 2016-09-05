@@ -9,6 +9,7 @@ var express = require('express'),
     categories = require('./routes/categories'),
     products = require('./routes/products'),
     sales = require('./routes/sales'),
+    users = require('./routes/users'),
     // weeklyData = require('./routes/getWeeklyData'),
     // login = require('./routes/login'),
     purchases = require('./routes/purchases'),
@@ -54,23 +55,7 @@ var dbOptions = {
       database: 'Nelisa'
 };
 
-// in a route
-// app.get("/users", function(req, res){
-//     // req.session will be defined nowsales
-//     if (!req.session.user){
-//         //set a session value from a form variable
-//         req.session.user = req.body.username;
-//     }
-// });
-
-
-app.get('/Sales/:week_name', function(req, res){
-  var weekname = req.params.week_name;
-  console.log(weekname);
-  var weeklyFile = "./files/"  + weekname +".csv";
-  var data = weeklyStats(weeklyFile, "./files/purchases.csv");
-    res.render( "weeklyStats", {key : data , week : weekname});
-});
+var session = require('express-session');
 
 //set up HttpSession middleware
 app.use(session({
@@ -78,7 +63,30 @@ app.use(session({
     cookie: { maxAge: 60000 }
 }));
 
-
+// //in a route-----------------------------------------------------------
+// app.get("users", function(req, res){
+//     if (!req.session.user){
+//         req.session.user = req.body.Username;
+//     }
+// });
+//
+// //set up HttpSession middleware
+// app.use(session({
+//     secret: 'put your secret phrase here please',
+//     cookie: { maxAge: 60000 }
+// }));
+//
+// app.use(function(req, res, next){
+//   console.log('in my middleware!');
+//   if (req.path != "/login"){
+//       if (!req.session.username ){
+//           // redirects to the login screen
+//           return res.redirect("/login");
+//       }
+//   }
+//   next();
+// });
+// -----------------------------------------------------------------
 //setup template handlebars as the template engine
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -99,15 +107,21 @@ function errorHandler(err, req, res, next) {
 
 //setup the handlers
 
-
+app.get('/mobile', function(req, res){
+    res.render( "mobile");
+});
+app.get('/login', function(req, res){
+    res.render( "login");
+});
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
 app.get('/categories/edit/:id', categories.get);
 app.post('/categories/update/:id', categories.update);
 app.post('/categories/add', categories.add);
+app.post('/users/add2', users.add2);
 // //this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/categories/delete/:id', categories.delete);
+app.get('/categories/check/:id', categories.check);
 
 
 app.get('/', function(req, res){
@@ -140,13 +154,27 @@ app.post('/purchases/add', purchases.add);
 app.get('/purchases/delete/:id', purchases.delete);
 // app.get('/login', login.checkUser);
 // create a new middleware component------------------------------------------
+app.get('/Sales/:week_name', function(req, res){
+  var weekname = req.params.week_name;
+  console.log(weekname);
+  var weeklyFile = "./files/"  + weekname +".csv";
+  var data = weeklyStats(weeklyFile, "./files/purchases.csv");
+    res.render( "weeklyStats", {key : data , week : weekname});
+});
 
+app.get('/users', function(req, res){
+  res.render('users');
+});
+// app.get('/users', checkUser, function(req, res){
+//   var userData = userService.getUserData();
+//   res.render('/users', userData)
+// });
 
 
 app.use(errorHandler);
 
 //configure the port number using and environment number
-var portNumber = process.env.CRUD_PORT_NR || 3000;
+var portNumber = process.env.CRUD_PORT_NR || 5000;
 
 //start everything up
 app.listen(portNumber, function () {
