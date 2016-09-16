@@ -2,13 +2,14 @@
   <h1 class="margin">User Login</h1>
 </div>
 
-<form id="form_text" role="form" class="form-horizontal" action="/users/add2" method="POST">
+<div id="login_bg">
+<form id="form_text" role="form" class="form-horizontal" action="/users/add" method="POST">
   <fieldset>
     <!-- <legend>Login</legend> -->
     <div class="form-group">
       <label for="inputUsername" class="col-lg-2 control-label">Username</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputUsername" placeholder="Username" name="Usersname" value="{{Usersname}}">
+        <input type="text" class="form-control" id="inputUsername" placeholder="Username" name="Username" value="{{Username}}">
       </div>
     </div>
     <div class="form-group">
@@ -26,3 +27,4 @@
     </div>
   </fieldset>
 </form>
+</div>

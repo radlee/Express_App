@@ -45,4 +45,3 @@ CREATE TABLE Users(
   Username char(100) NOT NULL,
   Password char(100) NOT NULL
 );
-INSERT INTO Users (Username,Password) VALUES ("lee", "123");

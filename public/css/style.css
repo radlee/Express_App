@@ -14,6 +14,12 @@ body {
   display: table;
   clear: both;
 }
+
+#csricodexmlab_text{
+  /*font-family:Atelier du Machiniste;*/
+  font-family:monospace;
+  /*font-size: 100px;*/
+}
 #image_div{
   text-align: center;
 }
@@ -116,6 +122,13 @@ ul.nav a:hover {
   border-top-right-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
 }
+td btn:hover{
+  color: #cddede !important;
+  background-color: black !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+
+}
 
 .navbar-nav > li > .dropdown-menu {
   background-color: #044052;
@@ -133,7 +146,7 @@ a {
 
 .navbar-brand>img {
   height: 100%;
-  padding: 15px;
+  /*padding: 15px;*/
   width: auto;
 }
 
