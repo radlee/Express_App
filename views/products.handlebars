@@ -20,8 +20,10 @@
                 <tr id="Heading">
                     <th>Product Name</th>
                     <th>Category Name</th>
+                    {{#if user.is_admin}}
                     <th class="editColor"></th>
                     <th class="editColor"></th>
+                    {{/if}}
                 </tr>
                 <tr class="warning no-result">
                     <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -34,15 +36,19 @@
 
                         <th id="des" class="info">{{Product}}</th>
                         <th id="des" class="info">{{Category}}</th>
-                        <td class="para"><strong><span style="color:#00adc8"><a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}">
-      <span class="glyphicon glyphicon-edit"></span> Edit
-    </a></span></strong></td>
+                        {{#if user.is_admin}}
+                            <td class="para">
+                                <strong><span style="color:#00adc8"><a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}">
+                                  <span class="glyphicon glyphicon-edit"></span> Edit</a></span></strong>
+                            </td>
 
-                        <td class="para">
-                            <a type="button" class="btn btn-danger" href="/products/delete/{{id}}">
-                                <span class="glyphicon glyphicon-trash"></span> Delete
-                            </a>
-                        </td>
+                            <td class="para">
+                                <a type="button" class="btn btn-danger" href="/products/delete/{{id}}">
+                                    <span class="glyphicon glyphicon-trash"></span> Delete
+                                </a>
+                            </td>
+                        {{/if}}
+
                 </tr>
             </tbody>
             {{/products}}

@@ -66,6 +66,7 @@ connection.query("SELECT * FROM Categories", function(err, Categories){
     ]
     values.push(result);
   })
+  console.log(values);
 
   connection.query("INSERT INTO Products (Product, CategoryID) VALUES ?", [values], function(err){
     if(err) throw err;

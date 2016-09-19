@@ -8,12 +8,12 @@ var connection = mysql.createConnection({
   database : "Nelisa"
 });
 // connection.connect();
-var sql = "INSERT INTO Users (Username, Password) VALUES ?"
+var sql = "INSERT INTO Users (Username, Password, Email, is_admin) VALUES ?"
 var Users =[
-  ["LEE", "196"],
-  ["MACKMAN2", "183"],
-  ["GRAND_101", "953"],
-  ["MASTER_", "593"]
+  ["LEE", "196", "lee@lee.com", "true"],
+  ["MACKMAN2", "183", "lae@lee.com", "false"],
+  ["GRAND_101", "953", "lde@lee.com", "false"],
+  ["MASTER_", "593", "lea@lee.com", "false"]
 ];
 //Insert Query ---
 connection.query(sql, [Users], function(err){

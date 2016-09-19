@@ -41,7 +41,9 @@ CREATE TABLE Purchases(
   FOREIGN KEY (ProductID) REFERENCES Products (id)
 );
 CREATE TABLE Users(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  Username char(100) NOT NULL,
-  Password char(100) NOT NULL
+  user_id INT PRIMARY KEY AUTO_INCREMENT,
+  Username VARCHAR(40) NOT NULL,
+  Password VARCHAR(120) NOT NULL,
+  Email VARCHAR(50) NOT NULL,
+  is_admin VARCHAR(5) NOT NULL
 );
