@@ -3,46 +3,44 @@
 </div>
 
 <div id="output">
-  <p>
-    <a style="color:white" class="btn btn-success btn-lg" href="/sales/add">
-      <span class="glyphicon glyphicon-plus"></span> Add a Sale
-    </a>
-  </p>
-
   <div>
-    <div class="form-group pull-right">
+    <div class="form-group pull-left">
         <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
     </div>
     <span class="counter pull-right"></span>
     <table style="width:100%" class="table table-hover results">
       <thead>
-      <tr id="Heading">
+      <tr id="table1" id="Heading">
         <!-- <th>Main ID Number</th> -->
-        <th>Date</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Product Name</th>
-        <th></th>
-        <th></th>
+        <th id="table1">Date</th>
+        <th id="table1">Quantity</th>
+        <th id="table1">Price</th>
+        <th id="table1">Product Name</th>
+        <th id="table1"></th>
+        <th id="table1"><a style="color:white" class="btn btn-success btn-block" href="/sales/add">
+          <span class="glyphicon glyphicon-plus"></span> Add a Sale
+        </a>
+      </th>
+        <th id="table1"></th>
       </tr>
-      <tr class="warning no-result">
-        <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+      <tr id="table1" class="warning no-result">
+        <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
       </tr>
     </thead>
-      <tr>
+      <tr id="table1">
         {{#sales}}
         <!-- <th id="des" class="info"><span style="color:#ffb900">ID#</span> : {{id}}</th> -->
-        <th id="des" class="info">{{Date}}</th>
-        <th id="des" class="info">{{Quantity}}</th>
-        <th id="des" class="info">R {{Price}}</th>
-        <th id="des" class="info"><span style="color:#ffb900">{{Product}}</span> </th>
-        <td class="para"><strong><span style="color:#00adc8">
+        <th id="table1" id="des">{{Date}}</th>
+        <th id="table1" id="des">{{Quantity}}</th>
+        <th id="table1" id="des">R {{Price}}</th>
+        <th id="table1" id="des"><span style="color:#ffb900">{{Product}}</span> </th>
+        <td id="table1" class="para"><strong><span style="color:#00adc8">
           <a type="button" class="btn btn-warning" href="/sales/edit/{{id}}">
           <span class="glyphicon glyphicon-edit"></span> Edit
         </a></span></strong>
         </td>
 
-        <td class="para"><a type="button" class="btn btn-danger" href="/sales/delete/{{id}}">
+        <td colspan="2" id="table1" class="para"><a type="button" class="btn btn-danger" href="/sales/delete/{{id}}">
         <span class="glyphicon glyphicon-trash"></span> Delete
       </a>
         </td>
