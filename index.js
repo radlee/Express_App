@@ -61,8 +61,8 @@ app.use(function(req, res, next){
 });
 
 var rolesMap = {
-  "Nelisa" : "admin",
-  "lee" : "view"
+  "Nelisa101" : "admin",
+  "lee" : "viewer"
 }
 
 //Set Up HttpSession Middleware
@@ -84,7 +84,6 @@ app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-
 //---------------------------TreeHouse------------------
 //GET /register
 app.get("/register", function(req, res, next){
@@ -99,6 +98,11 @@ app.get("/",function(req, res) {
   res.redirect("/home");
 });
 
+app.get("/login", function(req, res) {
+  res.render("login", {
+    showNavBar: false
+  });
+});
 var checkUser = function(req, res, next) {
   if(req.session.user){
     return next();
@@ -125,8 +129,10 @@ app.post("/login", function(req, res, next){
             if(item.username == item2.name && item.password == item2.pass){
               req.session.user = {
                 name : req.body.username,
-                is_admin : rolesMap[req.body.username] === "admin"
+                is_admin : rolesMap[req.body.username] === "admin",
+                viewer : rolesMap[req.body.username] === "viewer"
               };
+              console.log(req.session.user);
               res.redirect("/home");
             }
             if(item.username == item2.name && item.password !== item2.pass){
@@ -135,21 +141,7 @@ app.post("/login", function(req, res, next){
               //And redirect the user back to login
               err.status =401;
               return next(err);
-              // console.log(item.username);
             }
-            if(item2.username === null){
-              console.log("SSSSSSSSs");
-
-            }
-            // if (dbUsers.is_admin === "admin") {
-            //   req.session.user = {
-            //     username: req.body.Username,
-            //     is_admin: true,
-            //     showNavBar: true
-            //   };
-            //   adminAccess = req.session.user.is_admin;
-            //   console.log("1)dbUsers.is_admin :" + adminAccess + " showNavBar : " + showNavBar);
-            // }
           })
         });
       });
@@ -161,61 +153,6 @@ app.post("/login", function(req, res, next){
     err.status =401;
     return next(err);
   }
-  //Works Fine ---------------------------------------------
-  // req.session.user = {
-  //   name : req.body.username,
-  //   is_admin : rolesMap[req.body.username] === "admin"
-  // };
-  // res.redirect("/home");
-  //--------------------------------------------------------
-});
-
-app.post("/login", function(req, res, next) {
-  var parm = req.body.username;
-  var sql = "SELECT * FROM Users WHERE Username = ? ";
-  req.getConnection(function(err, connection) {
-    connection.query(sql, [parm], function(err, dbUsers) {
-      if (err) return next(err);
-      console.log(dbUsers);
-      var dbUsers = dbUsers[0];
-      if (dbUsers === undefined) {
-        req.flash("warning", 'Invalid username');
-        return res.redirect("/login");
-      };
-      if (dbUsers.Password !== req.body.Password) { // checks to see if the passwords match
-        req.flash('warning', "Your password is invalid");
-        return res.redirect("/login");
-      };
-      if (dbUsers.is_admin === "admin") {
-        req.session.user = {
-          username: req.body.Username,
-          is_admin: true,
-          showNavBar: true
-        };
-        adminAccess = req.session.user.is_admin;
-        console.log("1)dbUsers.is_admin :" + adminAccess + " showNavBar : " + showNavBar);
-      }
-      else {
-        req.session.user = {
-          username: req.body.Username,
-          is_admin: false,
-          showNavBar: true
-        };
-        adminAccess = req.session.user.is_admin;
-        console.log("2)dbUsers.is_admin :" + adminAccess + " showNavBar : " + showNavBar);
-      };
-
-      var allowedToLogin = false; // variable reset for allowing a user to go to login page
-      if (req.session.user.username.trim() === req.body.Username) { // if the form username matches with the database username , gets rid of the whitespaces
-        allowedToLogin = true;
-      };
-      if (allowedToLogin) { // if the user is found on the database , allow him or her to login
-        res.redirect("/home"); // go home
-      } else {
-        res.redirect("/login"); // else redirect back to the login page
-      };
-    });
-  });
 });
 
 app.get("/home", checkUser, function(req, res) {
@@ -227,11 +164,7 @@ app.get("/home", checkUser, function(req, res) {
 });
 
 
-app.get("/login", function(req, res) {
-  res.render("login", {
-    showNavBar: false
-  });
-});
+
 
 //Why not ideal ? |-----Delete the User----|
 app.get("/logout", function(req, res) { // To authenticate logging out
