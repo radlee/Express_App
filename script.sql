@@ -19,7 +19,7 @@ CREATE TABLE Products(
   Product char(100) NOT NULL,
   CategoryID INT,
   FOREIGN KEY (CategoryID) REFERENCES Categories (id),
-  CONSTRAINT uc_Products UNIQUE (Product)
+  CONSTRAINT uc_Product UNIQUE (Product)
 );
 
 CREATE TABLE Sales(
@@ -42,8 +42,7 @@ CREATE TABLE Purchases(
 );
 CREATE TABLE Users(
   user_id INT PRIMARY KEY AUTO_INCREMENT,
-  Username VARCHAR(40) NOT NULL,
-  Password VARCHAR(120) NOT NULL,
-  Email VARCHAR(50) NOT NULL,
-  is_admin VARCHAR(5) NOT NULL
+  username VARCHAR(40) NOT NULL,
+  password VARCHAR(120) NOT NULL,
+  email VARCHAR(50) NOT NULL
 );

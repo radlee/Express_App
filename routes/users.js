@@ -2,40 +2,63 @@ exports.show = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     connection.query('SELECT * from Users', [], function(err, results) {
+      // console.log("results--------------");
+      // console.log(results);
       if (err) return next(err);
       res.render('users', {
-        showNavBar : req.session.user.showNavBar,
-        is_admin: req.session.user.is_admin,
-        no_users: results.length === 0,
-        users: results
+        no_users : results.length === 0,
+				users : results,
       });
     });
   });
 };
 
+exports.authenticate = function(req, res, next) {
+  req.getConnection(function(err, connection) {
+    if (err) return next(err);
+    connection.query('SELECT * from Users', [], function(err, results) {
+      console.log("results--------------");
+      console.log(results);
+    });
+  });
+};
+
 exports.showAdd = function(req, res) {
-  res.render('add_user', {
-    showNavBar : req.session.user.showNavBar,
-    is_admin: req.session.user.is_admin
-  })
+  res.render('add_user');
 }
 
 exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
-    if (err) return next(err);
-
-      var data = {
-        username: req.body.Username,
-        password: req.body.Password ,
-        email: req.body.Email,
-        is_admin: req.body.is_admin
-      };
-      connection.query('insert into Users set ?', data, function(err, results) {
+    if(req.body.email &&
+       req.body.username &&
+       req.body.password &&
+       req.body.password_confirm){
+        if(req.body.password !== req.body.password_confirm){
+          var err = new Error("Passwords do not match");
+          err.status = 400;
+          return next(err);
+        }
+        var userData = {
+          email : req.body.email,
+          username : req.body.username,
+          password : req.body.password
+        };
+    }
+    else{
+      var err = new Error("All fields required");
+      err.status = 400;
+      return next(err);
+    }
+      connection.query('insert into Users set ?', [userData], function(err, results) {
         if (err) return next(err);
+        req.session.user_id = userData.id;
+
         res.redirect('/users');
       });
   });
 };
+
+
 
 exports.get = function(req, res, next) {
   var id = req.params.user_id;
@@ -43,8 +66,6 @@ exports.get = function(req, res, next) {
     connection.query('SELECT * FROM Users WHERE user_id = ?', [id], function(err, result) {
       if (err) return next(err);
       res.render('edit_user', {
-        showNavBar : req.session.user.showNavBar,
-        is_admin: req.session.user.is_admin,
         data: result[0]
       });
     });
@@ -54,10 +75,9 @@ exports.get = function(req, res, next) {
 exports.update = function(req, res, next) {
 
   var data = {
-    username: req.body.Username,
-    password: req.body.Password,
-    email: req.body.Email,
-    is_admin: req.body.is_admin
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email
   };
   var id = req.params.user_id;
   req.getConnection(function(err, connection) {

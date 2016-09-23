@@ -15,8 +15,24 @@ body {
     line-height: 30px;
     text-align: center;
 }
+.navbar-toggle{
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: blue !important;
+}
+/*Make the menu collapse button small*/
+.icon-bar{
+  width: 100% !important;
+}
+fieldset{
+  color: white;
+}
+#legend{
+  color: white;
+
+}
 
 .inner-bg {
+  padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }
@@ -172,9 +188,9 @@ a {
 }
 
 .navbar-inverse {
-  background-color: #044052  !important;
-  border-color: #006687;
+  background: rgba(0, 0, 0, 0.5) !important;
   color: white !important;
+  border: none !important;
 }
 
 .navbar-brand>img {

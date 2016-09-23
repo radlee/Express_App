@@ -56,7 +56,7 @@ app.set('view engine', 'handlebars');
 
 // ----------Andre 1--------------------
 app.use(function(req, res, next){
-  console.log("in the middleware !");
+  // console.log("in the middleware !");
   next();
 });
 
@@ -66,7 +66,13 @@ var rolesMap = {
 }
 
 //Set Up HttpSession Middleware
-app.use(session({secret: 'passme a cookie',cookie: {maxAge: 600000}}));
+app.use(session({secret: 'passme a cookie', resave : true, saveUninitialized : false, cookie: {maxAge: 600000}}));
+//Make userID available in all templates / Creating Middleware ---------------
+app.use(function(req, res, next){
+  res.locals.currentUser = req.session.userID;
+  next();
+});
+
 app.post('/', function(req, res){
 
 });
@@ -78,8 +84,19 @@ app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+
+//---------------------------TreeHouse------------------
+//GET /register
+app.get("/register", function(req, res, next){
+  res.render("register");
+});
+
+//POST /register
+app.post("/register/add",users.show);
+
+
 app.get("/",function(req, res) {
-  res.redirect("home");
+  res.redirect("/home");
 });
 
 var checkUser = function(req, res, next) {
@@ -89,24 +106,72 @@ var checkUser = function(req, res, next) {
   res.redirect("/login");
 };
 
-app.post("/login", function(req, res){
-  req.session.user = {
-    name : req.body.Username,
-    is_admin : rolesMap[req.body.Username] === "admin"
-  };
-  res.redirect("/home");
-})
+app.post("/login", function(req, res, next){
+  var user1 = [];
+  if(req.body.username){
+    var user = {
+      name : req.body.username,
+      pass : req.body.password
+    }
+    user1.push(user);
+    console.log(user1);
 
-app.get("/home", checkUser, function(req, res) {
-  res.render("home", {
-    showNavBar: req.session.user.showNavBar,
-    user: req.session.user,
-    is_admin: req.session.user.is_admin
-  })
+    req.getConnection(function(err, connection) {
+      connection.query("SELECT * FROM Users", [], function(err, dbUsers) {
+        if (err) return next(err);
+        console.log("My Users DTBS Usernames------------");
+        dbUsers.forEach(function(item){
+          user1.forEach(function(item2){
+            if(item.username == item2.name && item.password == item2.pass){
+              req.session.user = {
+                name : req.body.username,
+                is_admin : rolesMap[req.body.username] === "admin"
+              };
+              res.redirect("/home");
+            }
+            if(item.username == item2.name && item.password !== item2.pass){
+              var err = new Error("Wrong Password");
+              //Replace this err var with req.flash("warning, "invalid password)
+              //And redirect the user back to login
+              err.status =401;
+              return next(err);
+              // console.log(item.username);
+            }
+            if(item2.username === null){
+              console.log("SSSSSSSSs");
+
+            }
+            // if (dbUsers.is_admin === "admin") {
+            //   req.session.user = {
+            //     username: req.body.Username,
+            //     is_admin: true,
+            //     showNavBar: true
+            //   };
+            //   adminAccess = req.session.user.is_admin;
+            //   console.log("1)dbUsers.is_admin :" + adminAccess + " showNavBar : " + showNavBar);
+            // }
+          })
+        });
+      });
+    });
+  }
+
+  else {
+    var err = new Error("Email and Password are required.");
+    err.status =401;
+    return next(err);
+  }
+  //Works Fine ---------------------------------------------
+  // req.session.user = {
+  //   name : req.body.username,
+  //   is_admin : rolesMap[req.body.username] === "admin"
+  // };
+  // res.redirect("/home");
+  //--------------------------------------------------------
 });
 
 app.post("/login", function(req, res, next) {
-  var parm = req.body.Username;
+  var parm = req.body.username;
   var sql = "SELECT * FROM Users WHERE Username = ? ";
   req.getConnection(function(err, connection) {
     connection.query(sql, [parm], function(err, dbUsers) {
@@ -152,6 +217,15 @@ app.post("/login", function(req, res, next) {
     });
   });
 });
+
+app.get("/home", checkUser, function(req, res) {
+  res.render("home", {
+    showNavBar: req.session.user.showNavBar,
+    user: req.session.user,
+    is_admin: req.session.user.is_admin
+  })
+});
+
 
 app.get("/login", function(req, res) {
   res.render("login", {
@@ -213,13 +287,10 @@ app.get('/Sales/:week_name', function(req, res){
   console.log(weekname);
   var weeklyFile = "./files/"  + weekname +".csv";
   var data = weeklyStats(weeklyFile, "./files/purchases.csv");
-    res.render( "weeklyStats", {key : data , week : weekname});
+  res.render( "weeklyStats", {key : data , week : weekname});
 });
 app.use(errorHandler);
-//configure the port number using and environment number
 var portNumber = process.env.CRUD_PORT_NR || 5000;
-
-//start everything up
 app.listen(portNumber, function () {
-    console.log('Server listening on:', portNumber);
+  console.log('Server listening on:', portNumber);
 });

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/form-elements.css">
 <!-- Date -->
-<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<!-- <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"> -->
 <!-- Favicon and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.png">
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
@@ -59,22 +59,16 @@
 							<li><a href="/Sales/Week4">Week 4</a></li>
 						</ul>
 					</li>
-					{{#if user}}
 					<li><a href="/categories">Categories</a></li>
 					<li><a href="/products">Products</a></li>
-					{{/if}}
 					<li><a href="/sales">Sales</a></li>
 					<li><a href="/purchases">Purchases</a></li>
 					<!-- <li><a href="/mobile">Mobile</a></li> -->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					{{#if is_admin}}
 	        <li><a href="/users"><span class="glyphicon glyphicon-user"></span> Manage Users</a></li>
 	        <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
-					{{else}}
-	        <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-	        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					{{/if}}
+	        <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 				</ul>
 	    </div>
 	  </div>
