@@ -13,7 +13,8 @@ var Users =[
   ["LEE", "196", "lee@lee.com"],
   ["MACKMAN2", "183", "lae@lee.com"],
   ["GRAND_101", "953", "lde@lee.com"],
-  ["MASTER_", "593", "lea@lee.com"]
+  ["Xolani", "123", "xolani@nelisa.co.za"],
+  ["Nelisa101", "112", "nelisa@nelisa.co.za"]
 ];
 //Insert Query ---
 connection.query(sql, [Users], function(err){

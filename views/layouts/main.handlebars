@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-<!-- CSS-Asseerts -->
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/form-elements.css">
-<!-- Date -->
-<!-- <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"> -->
-<!-- Favicon and touch icons -->
-<link rel="shortcut icon" href="assets/ico/favicon.png">
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-<!-- Main CSS -->
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/searchScript.css">
-<title>Nelisa's Weekly Sales</title>
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script> -->
-	<script src="js/jquery.js"></script>
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
-	<script src="/js/bootstrap.min.js"></script>
 	<link rel="shortcut icon" href="https://raw.githubusercontent.com/radlee/Nelisa/b9816b52a0796aee0f13f72bc06ff8fa7166475d/img/NSPNG.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<!-- CSS-Asseerts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/form-elements.css">
+	<!-- Favicon and touch icons -->
+	<link rel="shortcut icon" href="assets/ico/favicon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+	<!-- Main CSS -->
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/searchScript.css">
+	<title>Nelisa's Weekly Sales</title>
+	<!-- Online -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+<!-- Local (Enable When OffLine)-->
+	<script src="js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<!-- End of local  -->
+	<!-- This is what you need -->
+  <script src="/js/sweetalert-dev.js"></script>
+  <link rel="stylesheet" href="/css/sweetalert.css">
+  <!--.......................-->
+
 </head>
 <body>
+
 	<div id="container">
 	  <!-- class="navbar navbar-inverse [ navbar-fixed-top ]" -->
-
 	<div id="navDiv">
 	  <nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
@@ -48,8 +53,9 @@
 
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-					{{#if is_admin}}
+					{{#if user}}
 	        <li class="dropdown active">
+						{{#if user}}
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Week
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -58,6 +64,7 @@
 							<li><a href="/Sales/Week3">Week 3</a></li>
 							<li><a href="/Sales/Week4">Week 4</a></li>
 						</ul>
+						{{/if}}
 					</li>
 					<li><a href="/categories">Categories</a></li>
 					<li><a href="/products">Products</a></li>
@@ -69,12 +76,11 @@
 					{{#if is_admin}}
 	        <li><a href="/users"><span class="glyphicon glyphicon-user"></span> Manage Users</a></li>
 					{{/if}}
-	        	<li><a href="/logout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
-					{{/if}}
+	        <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+					{{else}}
+
 	        <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 	        <li><a href="/login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-					{{#if viewer}}
-					<li><a href="/logout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
 					{{/if}}
 				</ul>
 	    </div>
@@ -84,7 +90,16 @@
 	{{{body}}}
 	</div>
 </body>
-
+																				<!-- Footer  -->
+<!-- <div class="container101">
+<h1>NelisaSpaza</h1>
+<div class="social">
+    <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+    <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+    <a href="#"><i class="fa fa-dribbble fa-2x"></i></a>
+</div>
+<h6>© 2016 Nelisa Spaza Developped at CodeX</h6>
+</div> -->
 <!-- Javascript -->
 <script src="assets/js/jquery-1.11.1.min.js"></script>
 <!-- <script src="assets/bootstrap/js/bootstrap.min.js"></script> -->
@@ -95,38 +110,4 @@
 <!-- Date  -->
 <script type="text/javascript" src="/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });
-	$('.form_date').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-    });
-	$('.form_time').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 1,
-		minView: 0,
-		maxView: 1,
-		forceParse: 0
-    });
-</script>
-
 </html>

@@ -6,6 +6,8 @@ exports.show = function (req, res, next) {
     		res.render( 'products', {
 					no_products : results.length === 0,
 					products : results,
+					user: req.session.user,
+				  is_admin: req.session.user.is_admin
     		});
       	});
 	});
@@ -17,7 +19,8 @@ exports.showAdd = function(req, res){
 		connection.query('SELECT * from Categories' , [], function(err, categories) {
         	if (err) return next(err);
     		res.render( 'add', {
-					categories : categories,
+					categories : categories, user: req.session.user,
+					is_admin: req.session.user.is_admin
     		});
       	});
 	});
@@ -55,7 +58,8 @@ exports.get = function(req, res, next){
 				});
 				res.render('edit', {
 					categories : categories,
-					data : product
+					data : product, user: req.session.user,
+					is_admin: req.session.user.is_admin
 				});
 			});
 		});

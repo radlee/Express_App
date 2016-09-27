@@ -12,6 +12,7 @@ var express = require('express'),
     sales = require('./routes/sales'),
     purchases = require('./routes/purchases'),
     users = require('./routes/users'),
+    mid = require('./middleware'),
     app = express();
     var readAndMakeObjects = require("./Modules/readAndMakeObjects");
     var getMostPopularProduct = require("./Modules/getMostPopularProduct");
@@ -62,7 +63,7 @@ app.use(function(req, res, next){
 
 var rolesMap = {
   "Nelisa101" : "admin",
-  "lee" : "viewer"
+  "Xolani" : "user"
 }
 
 //Set Up HttpSession Middleware
@@ -86,19 +87,19 @@ app.use(bodyParser.json())
 
 //---------------------------TreeHouse------------------
 //GET /register
-app.get("/register", function(req, res, next){
+app.get("/register", mid.loggedOut, function(req, res, next){
   res.render("register");
 });
 
 //POST /register
-app.post("/register/add",users.show);
+app.post("/register/add",mid.registered, users.show);
 
 
 app.get("/",function(req, res) {
   res.redirect("/home");
 });
 
-app.get("/login", function(req, res) {
+app.get("/login",mid.loggedOut, function(req, res) {
   res.render("login", {
     showNavBar: false
   });
@@ -118,7 +119,6 @@ app.post("/login", function(req, res, next){
       pass : req.body.password
     }
     user1.push(user);
-    console.log(user1);
 
     req.getConnection(function(err, connection) {
       connection.query("SELECT * FROM Users", [], function(err, dbUsers) {
@@ -130,41 +130,32 @@ app.post("/login", function(req, res, next){
               req.session.user = {
                 name : req.body.username,
                 is_admin : rolesMap[req.body.username] === "admin",
-                viewer : rolesMap[req.body.username] === "viewer"
+                user : rolesMap[req.body.username] === "user"
               };
               console.log(req.session.user);
               res.redirect("/home");
             }
             if(item.username == item2.name && item.password !== item2.pass){
-              var err = new Error("Wrong Password");
-              //Replace this err var with req.flash("warning, "invalid password)
-              //And redirect the user back to login
-              err.status =401;
-              return next(err);
+              req.flash("warning", 'Wrong Password');
+              return res.redirect("/login");
             }
           })
         });
       });
     });
   }
-
   else {
-    var err = new Error("Email and Password are required.");
-    err.status =401;
-    return next(err);
+    req.flash("warning", 'Email and Password are required.');
+    return res.redirect("/login");
   }
 });
 
 app.get("/home", checkUser, function(req, res) {
   res.render("home", {
-    showNavBar: req.session.user.showNavBar,
     user: req.session.user,
     is_admin: req.session.user.is_admin
   })
 });
-
-
-
 
 //Why not ideal ? |-----Delete the User----|
 app.get("/logout", function(req, res) { // To authenticate logging out
@@ -177,50 +168,48 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 
-app.get('/categories', categories.show);
-app.get('/categories/add', categories.showAdd);
-app.get('/categories/edit/:id', categories.get);
-app.post('/categories/update/:id', categories.update);
-app.post('/categories/add', categories.add);
-app.get('/categories/check/:id', categories.check);
+app.get('/categories',mid.requiresLogin, categories.show);
+app.get('/categories/add',mid.requiresLogin, categories.showAdd);
+app.get('/categories/edit/:id',mid.requiresLogin, categories.get);
+app.post('/categories/update/:id',mid.requiresLogin, categories.update);
+app.post('/categories/add',mid.requiresLogin, categories.add);
+app.get('/categories/check/:id',mid.requiresLogin, categories.check);
 
+app.get('/products',mid.requiresLogin, products.show);
+app.get('/products/edit/:id',mid.requiresLogin, products.get);
+app.post('/products/update/:id',mid.requiresLogin, products.update);
+app.get('/products/add',mid.requiresLogin, products.showAdd);
+app.post('/products/add',mid.requiresLogin, products.add);
+app.get('/products/delete/:id',mid.requiresLogin, products.delete);
 
-app.get('/products', products.show);
-app.get('/products/edit/:id', products.get);
-app.post('/products/update/:id', products.update);
-app.get('/products/add', products.showAdd);
-app.post('/products/add', products.add);
-app.get('/products/delete/:id', products.delete);
+app.get('/sales',mid.requiresLogin, sales.show);
+app.get('/sales/add',mid.requiresLogin, sales.showAdd);
+app.get('/sales/edit/:id',mid.requiresLogin, sales.get);
+app.post('/sales/update/:id',mid.requiresLogin, sales.update);
+app.post('/sales/add',mid.requiresLogin, sales.add);
+app.get('/sales/delete/:id',mid.requiresLogin, sales.delete);
 
-app.get('/sales', sales.show);
-app.get('/sales/add', sales.showAdd);
-app.get('/sales/edit/:id', sales.get);
-app.post('/sales/update/:id', sales.update);
-app.post('/sales/add', sales.add);
-app.get('/sales/delete/:id', sales.delete);
+app.get('/purchases',mid.requiresLogin, purchases.show);
+app.get('/purchases/add',mid.requiresLogin, purchases.showAdd);
+app.get('/purchases/edit/:id',mid.requiresLogin, purchases.get);
+app.post('/purchases/update/:id',mid.requiresLogin, purchases.update);
+app.post('/purchases/add',mid.requiresLogin, purchases.add);
+app.get('/purchases/delete/:id',mid.requiresLogin, purchases.delete);
 
-app.get('/purchases', purchases.show);
-app.get('/purchases/add', purchases.showAdd);
-app.get('/purchases/edit/:id', purchases.get);
-app.post('/purchases/update/:id', purchases.update);
-app.post('/purchases/add', purchases.add);
-app.get('/purchases/delete/:id', purchases.delete);
-
-app.get('/users', users.show);
-app.get('/users/add', users.showAdd);
-app.post('/users/add', users.add);
-app.get('/users/edit/:user_id', users.get);
-app.post('/users/update/:user_id', users.update);
-app.get('/users/delete/:user_id', users.delete);
-
+app.get('/users',mid.requiresLogin,mid.requiresLoginAsAdmin, users.show);
+app.get('/users/add',mid.requiresLogin, users.showAdd);
+app.post('/users/add',mid.requiresLogin, users.add);
+app.get('/users/edit/:user_id',mid.requiresLogin, users.get);
+app.post('/users/update/:user_id',mid.requiresLogin, users.update);
+app.get('/users/delete/:user_id',mid.requiresLogin, users.delete);
 
 // create a new middleware component-----------------
-app.get('/Sales/:week_name', function(req, res){
+app.get('/Sales/:week_name',mid.requiresLogin, function(req, res){
   var weekname = req.params.week_name;
-  console.log(weekname);
   var weeklyFile = "./files/"  + weekname +".csv";
   var data = weeklyStats(weeklyFile, "./files/purchases.csv");
-  res.render( "weeklyStats", {key : data , week : weekname});
+  res.render( "weeklyStats", {key : data , week : weekname, user: req.session.user,
+  is_admin: req.session.user.is_admin});
 });
 app.use(errorHandler);
 var portNumber = process.env.CRUD_PORT_NR || 5000;

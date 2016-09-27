@@ -4,7 +4,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: #fff;
-  background-color: #151515;
+  background-color: #151515 !important;
   font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
 /*Extra -----*/
   /*background: #f8f8f8;*/
@@ -15,9 +15,27 @@ body {
     line-height: 30px;
     text-align: center;
 }
+.row101{
+  padding: 20px;
+}
+.containerOne{
+  display: block;
+}
+.container101{
+  color: white;
+}
+.mother{
+margin: auto;
+color: white;
+text-align: left;
+}
 .navbar-toggle{
   background: rgba(0, 0, 0, 0.5) !important;
   color: blue !important;
+}
+#warning{
+  text-align: center!important;
+  color: red;
 }
 /*Make the menu collapse button small*/
 .icon-bar{
@@ -61,6 +79,7 @@ fieldset{
 }
 #csricodexmlab{
   /*opacity: 0.5;*/
+  height: 200px !important;
   /*background-color: black;*/
   /*color: white !important;*/
   /*font-family:Atelier du Machiniste;*/
@@ -76,13 +95,16 @@ fieldset{
   text-align: center;
   width: 60%;
 }
+.pull-left{
+  width: 100%;
+}
 
 #search_mobile{
   text-align: center !important;
 }
-.pull-right {
-  background-color: #044052;
-  color: white !important;
+.pull-left{
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
   border-bottom-left-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
   border-top-left-radius: 20px !important;
@@ -210,12 +232,6 @@ a:link, a:visited {
 }
 
 #info {
-  background-color: #02cab6;
-}
-
-h2 {
-  color: gray;
-  foont-size: .8em;
   background-color: #02cab6;
 }
 

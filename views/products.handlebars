@@ -7,7 +7,10 @@
         <div class="form-group pull-left">
             <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
         </div>
-        <span class="counter pull-right"></span>
+        <span class="counter pull-left"></span>
+        <p>
+
+        </p>
         <table id="tttt" style="width:100%" class="table table-hover results">
             <thead>
                 <tr id="table1" id="Heading">
@@ -27,19 +30,23 @@
             <tbody>
                 <tr id="table1">
                     {{#products}}
-                        <!-- <th id="des" class="info"><span style="color:#ffb900">ID#</span> : {{id}}</th> -->
-
                         <td id="table1">{{Product}}</td>
                         <td id="table1">{{Category}}</td>
                         <td id="table1" class="para">
-                            <strong><span style="color:#00adc8"><a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}">
-                                  <span class="glyphicon glyphicon-edit"></span> Edit</a></span></strong>
+                            <strong>
+                              <span style="color:#00adc8"><a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                              </span>
+                            </strong>
                         </td>
 
-                        <td id="table1" class="para">
+                        <!-- <td id="table1" class="para">
                             <a type="button" class="btn btn-danger" href="/products/delete/{{id}}">
                                 <span class="glyphicon glyphicon-trash"></span> Delete
                             </a>
+                        </td> -->
+
+                        <td id="table1" class="warning">
+                            <input type="button" value="Delete" class="btn btn-danger" id="btn_Delete1" href="/products/delete/{{id}}">
                         </td>
                 </tr>
             </tbody>
@@ -48,6 +55,91 @@
     </div>
 </div>
 
+
+
+<table width="100%" cellspacing="0" class="table table-striped table-bordered dataTable"
+    id="example" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <thead>
+        <tr role="row">
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                colspan="1" style="width: 0px;" aria-sort="ascending" aria-label="Row: activate to sort column descending">Row</th>
+            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                colspan="1" style="width: 0px;" aria-label="UserName: activate to sort column ascending">UserName</th>
+            <th class="sorting" tabindex="0" aria-controls="example"
+                rowspan="1" colspan="1" style="width: 0px;" aria-label="FName: activate to sort column ascending">FName</th>
+            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                colspan="1" style="width: 0px;" aria-label="LName: activate to sort column ascending">LName</th>
+            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                colspan="1" style="width: 0px;" aria-label="Delete: activate to sort column ascending">Delete</th>
+        </tr>
+    </thead>
+
+    <tfoot>
+        <tr>
+            <th rowspan="1" colspan="1">Row</th>
+            <th rowspan="1" colspan="1">UserName</th>
+            <th rowspan="1" colspan="1">FName</th>
+            <th rowspan="1" colspan="1">LName</th>
+            <th rowspan="1" colspan="1">Delete</th>
+        </tr>
+    </tfoot>
+    <tbody id="tblUsers">
+        <tr class="examples odd" id="UserId_1" role="row">
+            <td class="sorting_1">1</td>
+            <td>admin</td>
+            <td>Mohammad</td>
+            <td>Farzin</td>
+            <td class="warning">
+                <input type="button" value="Delete" class="sweet-5" id="btn_Delete1">
+            </td>
+        </tr>
+        <tr class="examples even" id="UserId_5" role="row">
+            <td class="sorting_1">2</td>
+            <td>11</td>
+            <td>11</td>
+            <td>11</td>
+            <td class="warning">
+                <input type="button" value="Delete" class="sweet-5" id="btn_Delete5">
+            </td>
+        </tr>
+        <tr class="examples odd" id="UserId_6" role="row">
+            <td class="sorting_1">3</td>
+            <td>11</td>
+            <td>11</td>
+            <td>11</td>
+            <td class="warning">
+                <input type="button" value="Delete" class="sweet-5" id="btn_Delete6">
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function () {
+$('body').on('click','td.warning input',function () {
+                swal({
+                    title: "Are you sure?",
+                    text: "This will also be deleted from your database!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn btn-raised btn-warning',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: "Cancel",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        swal("Deleted!", "Item Deleted!", "success");
+                    } else {
+                        swal("Cancelled", "Item will not be deleted", "error");
+                    }
+                });
+            });
+
+});
+
+</script>
 
 {{#no_products}}
     <p>No products available yet. Add some above.</p>

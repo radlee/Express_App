@@ -1,13 +1,68 @@
 {{#if user}}
-<div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
-  <h1 class="margin">Hi, {{user.name}}</h1>
-</div>
+    <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
+        <h1 class="margin">Hi, {{user.name}}</h1>
+        <h3 id='warning'>{{messages.warning}}</h3>
+    </div>
 
-<!-- <center><img src="/img/nelisa1.png" alt="what image shows" height="300%" width="50%"></center> -->
 {{/if}}
 
-<h1>Welcome to Your Dashboard</h1>
+<h1 style="color:white">Welcome to Your Dashboard</h1>
 
 {{#if user.is_admin}}
-<h1 class="margin" style="color:red">Admin Role  : <span style="color: green">{{user.is_admin}}</span></h1>
+    <h1 class="margin" style="color:lightgreen"></span></h1>
+    <div class="mother">
+    <div class="col-xs-12 col-md-2">
+        <a href="#" class="thumbnail">
+            <img src="/img/ProfileNelisa.png" alt="Sk">
+        </a>
+    </div>
+    <div class="col-xs-12 col-md-2">
+        <h2>Manager </h2>
+        <ul>
+          <li><p>Lives : Khayelitsha</p></li>
+          <li><p>Role : Amin/Manager</p></li>
+          <li><p>Controll Panell : Full</p></li>
+          <li><p>Can : Do whatever she wants</p></li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-md-2">
+        <a href="#" class="thumbnail">
+            <img src="/img/sk.jpg" alt="Sk">
+        </a>
+    </div>
+    <div class="col-xs-12 col-md-2">
+        <a href="#" class="thumbnail">
+            <img src="/img/ProjectcodeX3.png" alt="Sk">
+        </a>
+    </div>
+    </div>
+    {{else}}
+    <div class="mother">
+    <div class="col-xs-12 col-md-2">
+        <a href="#" class="thumbnail">
+            <img src="/img/ProfileXolani.png" alt="Sk">
+        </a>
+    </div>
+    <div class="col-xs-12 col-md-2">
+        <h2>Assistant</h2>
+        <ul>
+          <li><p>Lives : Khayelitsha</p></li>
+          <li><p>Role : SmallAdmin</p></li>
+          <li><p>Controll Panell : 1/5</p></li>
+          <li><p>Can : Do stuff</p></li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-md-2">
+        <a href="#" class="thumbnail">
+            <img src="/img/sk.jpg" alt="Sk">
+        </a>
+    </div>
+    <div class="col-xs-12 col-md-2">
+        <a href="#" class="thumbnail">
+            <img src="/img/ProjectcodeX3.png" alt="Sk">
+        </a>
+    </div>
+    </div>
 {{/if}}

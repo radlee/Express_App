@@ -1,33 +1,60 @@
-<h1>Add user</h1><br>
+<div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
+    <h1 class="margin">Add New Administrator</h1>
+    <h3 id='warning'>{{messages.warning}}</h3>
 
-<form class="form-horizontal" action="/users/add" method="POST">
+</div>
+{{#if msg}}
+    <div class="message">
+      {{msg}}
+    </div>
+  {{/if}}
 
-		<div class="form-group">
-			<label for="" class="col-sm-2 control-label">User Name </label>
-			<div class="col-sm-2">
-				<input type="text" name="username" value="{{username}}">
-			</div>
-		</div>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <form role="form" class="form-horizontal" action="/users/add" method="POST">
+                        <fieldset>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="text" id="username" name="username" value="{{username}}" placeholder="Username" class="form-control input">
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
 
-		<div class="form-group">
-			<label for="" class="col-sm-2 control-label">Password </label>
-				<div class="col-sm-3">
-					<input type="password" name="password" value="{{password}}">
-				</div>
-		</div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="email" id="email" name="email" value="{{email}}" placeholder="Email" class="form-control input">
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
 
-		<div class="form-group">
-			<label for="" class="col-sm-2 control-label">Email</label>
-			<div class="col-sm-3">
-				<input type="email" name="email" value="{{email}}">
-			</div>
-		</div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="password" id="password" name="password" value="{{password}}" placeholder="Password" class="form-control input">
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
 
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<div class="col-sm-0">
-				<button type="submit" class="btn btn-info">Submit</button>
-			</div>
-		</div>
-	</div>
-</form>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="password" id="password_confirm" name="password_confirm" value="{{password_confirm}}" placeholder="Confirm Password"
+                                        class="form-control input">
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button type="reset" class="btn btn-success">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
