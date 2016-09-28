@@ -83,7 +83,7 @@ fieldset{
 }
 #csricodexmlab{
   /*opacity: 0.5;*/
-  height: 200px !important;
+  /*height: 200px !important;*/
   /*background-color: black;*/
   /*color: white !important;*/
   /*font-family:Atelier du Machiniste;*/
@@ -400,7 +400,7 @@ td {
   }
 
   .jumbotron {
-    height: 50% !important;
+    /*height: 50% !important;*/
     font-size: 20px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
