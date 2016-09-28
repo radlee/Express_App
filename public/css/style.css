@@ -358,7 +358,7 @@ td {
   .icon-bar{
     width: 20% !important;
     opacity: 0;
-    padding-left: 30px;
+    /*padding-left: 5px;*/
   }
   .navbar-toggle{
     background: rgba(0, 0, 0, 0.5) !important;
