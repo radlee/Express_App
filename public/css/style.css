@@ -400,10 +400,10 @@ td {
   }
 
   .jumbotron {
-    height: 100%;
-    opacity: 0.5 !important;
-    color: white !important;
-    background-color: #008080 !important;
+    height: 50% !important;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
   }
 
   .dropdown-menu li:hover .sub-menu {
