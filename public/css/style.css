@@ -350,6 +350,21 @@ td {
   #Heading {
     color: white;
   }
+  .navbar-brand>img {
+    /*height: 80%;*/
+    padding: 10px;
+    /*width: auto;*/
+  }
+  .icon-bar{
+    width: 20% !important;
+    opacity: 0;
+    padding-left: 30px;
+  }
+  .navbar-toggle{
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: blue !important;
+  }
+
   .buttons_mobile{
     text-align: center;
   }
@@ -363,6 +378,10 @@ td {
     background-color: white !important;
     color: grey;
   }
+  .navbar-header{
+    padding-right: 50px;
+  }
+
 
   .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     /*background-color:#33ccff !important;*/
@@ -405,6 +424,7 @@ td {
     background: rgba(0, 0, 0, 0.5);
     color: white;
   }
+
 
   .dropdown-menu li:hover .sub-menu {
     display: block !important;
