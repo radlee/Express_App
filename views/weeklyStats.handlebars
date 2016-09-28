@@ -1,31 +1,22 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/24d1b840619873.57b2ad3cef0f2.png); background-size: 100%;">
     <h1 class="margin" id="heading1"><span style="color:lightblue">{{week}}</span> <span style="color: white">Sales Statistics</span></h1>
-    <br>
-    <div class="row">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4">
-        </div>
-    </div>
 </div>
 
 <div id="output">
     <div>
         <table style="width:100%" class="table table-hover">
-            <tr>
+            <tr id="table1">
                 {{#key}}
-                    <th id="des" class="info">{{Description}}</th>
-                    <td class="para"><strong><span style="color:#fff">{{Item}} {{Category}}</span></strong></td>
+                    <th id="table1">{{Description}}</th>
+                    <td id="table1"><strong><span style="color:#fff">{{Item}} {{Category}}</span></strong></td>
                     {{#if Profit}}
-                        <th class="info">
+                        <th id="table1">
                             <span style="color:#059407">Profit</span>
                         </th>
                     {{else}}
-                        <th class="info">Quantity</th>
+                        <th id="table1">Quantity</th>
                     {{/if}}
-                    <td class="para">{{Quantity}} {{Profit}}</td>
+                    <td class="profit" id="table1">{{Quantity}} {{Profit}}</td>
             </tr>
             {{/key}}
         </table>

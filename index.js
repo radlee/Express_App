@@ -12,35 +12,10 @@ var express = require('express'),
     sales = require('./routes/sales'),
     purchases = require('./routes/purchases'),
     users = require('./routes/users'),
+    stats = require('./routes/stats'),
     mid = require('./middleware'),
     app = express();
-    var readAndMakeObjects = require("./Modules/readAndMakeObjects");
-    var getMostPopularProduct = require("./Modules/getMostPopularProduct");
-    var getLeastPopularProduct = require("./Modules/getLeastPopularProduct");
-    var getMostPopularCategory = require("./Modules/getMostPopularCategory");
-    var getLeastPopularCategory = require("./Modules/getLeastPopularCategory");
-    var getMostProfitableCategory = require("./Modules/getMostProfitableCategory");
-    var getMostProfitableProduct = require("./Modules/getMostProfitableProduct");
-    var getArrayOfItemsAndProfits = require("./Modules/getArrayOfItemsAndProfits");
-    var getCategories = require("./Modules/getCategories");
-    var getSales = require("./Modules/getSales");
-    var getCosts = require("./Modules/getCosts");
-    var getProductNamesAndCategoryNames = require("./Modules/getProductNamesAndCategoryNames");
-    var weeklyStats = function(weekPath, purchasesPath){
-      var listOfObjects = readAndMakeObjects(weekPath);
-      // Weekly Sales and Weekly Purchases Lists Of Objects ----
-      var objArray1 = getSales(weekPath);
-      var objArray2 = getCosts(purchasesPath);
-      var arrayOfProfits = getArrayOfItemsAndProfits(objArray1, objArray2);
-      var mostPopularCategory = getMostPopularCategory(listOfObjects);
-      var mostPopularProduct = getMostPopularProduct(listOfObjects);
-      var leastPopularProduct = getLeastPopularProduct(listOfObjects);
-      var leastPopularCategory = getLeastPopularCategory(listOfObjects);
-      var mostProfitableProduct = getMostProfitableProduct(objArray1, objArray2);
-      var mostProfitableCategory = getMostProfitableCategory(arrayOfProfits);
-      var arrayOfCategories = getCategories(listOfObjects);
-      return [mostPopularProduct, leastPopularProduct, mostPopularCategory, leastPopularCategory, mostProfitableProduct, mostProfitableCategory];
-    }
+
 var dbOptions = {
       host: 'localhost',
       user: 'root',
@@ -204,13 +179,8 @@ app.post('/users/update/:user_id',mid.requiresLogin, users.update);
 app.get('/users/delete/:user_id',mid.requiresLogin, users.delete);
 
 // create a new middleware component-----------------
-app.get('/Sales/:week_name',mid.requiresLogin, function(req, res){
-  var weekname = req.params.week_name;
-  var weeklyFile = "./files/"  + weekname +".csv";
-  var data = weeklyStats(weeklyFile, "./files/purchases.csv");
-  res.render( "weeklyStats", {key : data , week : weekname, user: req.session.user,
-  is_admin: req.session.user.is_admin});
-});
+app.get('/:week_name',mid.requiresLogin, stats.show);
+
 app.use(errorHandler);
 var portNumber = process.env.CRUD_PORT_NR || 5000;
 app.listen(portNumber, function () {
