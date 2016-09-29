@@ -60,7 +60,7 @@ exports.add = function(req, res, next) {
       //
       // })
         if(req.body.password !== req.body.password_confirm){
-          req.flash("warning", 'Passwords do not match');
+          req.flash("warning", 'Passwords do not match.');
           return res.redirect("/register");
         }
         req.session.user = {
