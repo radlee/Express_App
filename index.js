@@ -61,24 +61,23 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 //---------------------------TreeHouse------------------
-//GET /register
 app.get("/register", mid.loggedOut, function(req, res, next){
   res.render("register");
 });
+app.get("/login",mid.loggedOut, function(req, res) {
+  res.render("login", {
+    showNavBar: false
+  });
+});
 
-//POST /register
-app.post("/register/add",mid.registered, users.show);
+app.post("/users/add",mid.registered, users.add);
 
 
 app.get("/",function(req, res) {
   res.redirect("/home");
 });
 
-app.get("/login",mid.loggedOut, function(req, res) {
-  res.render("login", {
-    showNavBar: false
-  });
-});
+
 var checkUser = function(req, res, next) {
   if(req.session.user){
     return next();
@@ -133,7 +132,7 @@ app.get("/home", checkUser, function(req, res) {
 });
 
 //Why not ideal ? |-----Delete the User----|
-app.get("/logout", function(req, res) { // To authenticate logging out
+app.get("/logout", function(req, res) {
   delete req.session.user;
   res.redirect("/login");
 });
@@ -171,17 +170,16 @@ app.post('/purchases/update/:id',mid.requiresLogin, purchases.update);
 app.post('/purchases/add',mid.requiresLogin, purchases.add);
 app.get('/purchases/delete/:id',mid.requiresLogin, purchases.delete);
 
-app.get('/users',mid.requiresLogin,mid.requiresLoginAsAdmin, users.show);
-app.get('/users/add',mid.requiresLogin, users.showAdd);
-app.post('/users/add',mid.requiresLogin, users.add);
-app.get('/users/edit/:user_id',mid.requiresLogin, users.get);
-app.post('/users/update/:user_id',mid.requiresLogin, users.update);
-app.get('/users/delete/:user_id',mid.requiresLogin, users.delete);
+app.get('/users',mid.requiresLogin, mid.requiresLoginAsAdmin, users.show);
+app.get('/users/add',mid.requiresLoginAsAdmin, users.showAdd);
+app.post('/users/add',mid.requiresLoginAsAdmin, users.add);
+app.get('/users/edit/:user_id',mid.requiresLoginAsAdmin, users.get);
+app.post('/users/update/:user_id',mid.requiresLoginAsAdmin, users.update);
+app.get('/users/delete/:user_id',mid.requiresLoginAsAdmin, users.delete);
 
-// create a new middleware component-----------------
 app.get('/:week_name',mid.requiresLogin, stats.show);
-
 app.use(errorHandler);
+
 var portNumber = process.env.CRUD_PORT_NR || 5000;
 app.listen(portNumber, function () {
   console.log('Server listening on:', portNumber);

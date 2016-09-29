@@ -9,7 +9,7 @@ exports.show = function(req, res, next) {
         no_users : results.length === 0,
 				users : results,
         user: req.session.user,
-			  is_admin: req.session.user.is_admin
+			  is_admin: req.session.is_admin
       });
     });
   });

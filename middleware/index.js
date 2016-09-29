@@ -13,7 +13,11 @@ function requiresLogin(req, res, next){
     return res.redirect("/login");
   }
 }
+//If visitor is not Admin warn them
 function requiresLoginAsAdmin(req, res, next){
+  // if(req.session.user.is_admin){
+  //   return next();
+  // }
   if(req.session.user.is_admin){
     return next();
   }
@@ -22,6 +26,7 @@ function requiresLoginAsAdmin(req, res, next){
     return res.redirect("/");
   }
 }
+//If there current user is loggedin or registered
 function registered(req, res, next){
   if(req.session){
     return next();
