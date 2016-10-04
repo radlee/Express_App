@@ -1,7 +1,7 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
     <h2 class="margin">Products</h2>
 </div>
-
+{{#if is_admin}}
 <div id="output">
   <div class="table-responsive">
         <div class="form-group pull-left">
@@ -55,6 +55,39 @@
     </div>
 </div>
 
+{{else}}
+
+<div id="output">
+  <div class="table-responsive">
+        <div class="form-group pull-left">
+            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
+        </div>
+        <span class="counter pull-left"></span>
+        <p>
+
+        </p>
+        <table id="tttt" style="width:100%" class="table table-hover results">
+            <thead>
+                <tr id="table1" id="Heading">
+                    <th id="table1">Product Name</th>
+                    <th id="table1">Category Name</th>
+                </tr>
+                <tr id="table1" class="warning no-result">
+                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="table1">
+                    {{#products}}
+                        <td id="table1">{{Product}}</td>
+                        <td id="table1">{{Category}}</td>
+                </tr>
+            </tbody>
+            {{/products}}
+        </table>
+    </div>
+</div>
+{{/if}}
 <script type="text/javascript">
 $(document).ready(function () {
 $('body').on('click','td.warning input',function () {

@@ -15,6 +15,9 @@ body {
     line-height: 30px;
     text-align: center;
 }
+#table12{
+  border-top-right-radius: 20px !important;
+}
 /*SalesStats*/
 /*#output{
   padding: 20px;

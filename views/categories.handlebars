@@ -1,6 +1,8 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
     <h2 id="csricodexmlab_text" class="margin">Categories</h2>
 </div>
+
+{{#if is_admin}}
 <div id="output">
   <a id="table1" style="color:white" class="btn btn-success" href="/categories/add">
       <span class="glyphicon glyphicon-plus"></span> Add a Category
@@ -53,6 +55,39 @@
         </table>
     </div>
 </div>
+
+{{else}}
+
+<div id="output">
+  <a id="table1" style="color:white" class="btn btn-success" href="/categories/add">
+      <span class="glyphicon glyphicon-plus"></span> Add a Category
+    </a>
+  <p></p>
+  <div class="table-responsive">
+        <div class=" pull-left">
+            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
+            <span class="counter pull"></span>
+
+        </div>
+
+        <table style="width:100%" class="table table-hover results">
+            <thead>
+                <tr id="table1" id="Heading">
+                    <th id="table1">Category Name</th>
+                </tr>
+                <tr id="table1" class="warning no-result">
+                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
+                </tr>
+            </thead>
+            <tr id="table1">
+                {{#categories}}
+                    <td id="table1" value="{{id}}">{{Category}}</td>
+            </tr>
+            {{/categories}}
+        </table>
+    </div>
+</div>
+{{/if}}
 
 <!-- Scrip for when box is checked it deletes what is checked only  -->
 <script type="text/javascript">

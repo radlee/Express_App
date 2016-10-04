@@ -2,8 +2,6 @@ exports.show = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     connection.query('SELECT * from Users', [], function(err, results) {
-      // console.log("results--------------");
-      // console.log(results);
       if (err) return next(err);
       res.render('users', {
         no_users : results.length === 0,
@@ -19,8 +17,6 @@ exports.authenticate = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     connection.query('SELECT * from Users', [], function(err, results) {
-      console.log("results--------------");
-      console.log(results);
     });
   });
 };
