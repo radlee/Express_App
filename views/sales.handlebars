@@ -32,6 +32,7 @@
         <td id="table1" id="des">{{Quantity}}</td>
         <td id="table1" id="des">R {{Price}}</td>
         <td id="table1" id="des"><span style="color:#ffb900">{{Product}}</span> </td>
+        {{#if is_admin}}
         <td id="table1" class="para"><strong><span style="color:#00adc8">
           <a type="button" class="btn btn-warning" href="/sales/edit/{{id}}">
           <span class="glyphicon glyphicon-edit"></span> Edit
@@ -42,6 +43,9 @@
         <span class="glyphicon glyphicon-trash"></span> Delete
       </a>
         </td>
+        {{else}}
+        <td>Null</td>
+        {{/if}}
       </tr>{{/sales}}
     </table>
   </div>
