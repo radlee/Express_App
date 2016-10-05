@@ -13,7 +13,6 @@ var connection = mysql.createConnection({
 //connection.connect()
 var mapOfProducts = readAndMakeObjects("../files/Week1.csv");
 
-console.log(mapOfProducts);
 var arrayOfCategories = getCategories(mapOfProducts);
 var productNamesAndCategoryNames = getProductNamesAndCategoryNames(arrayOfCategories);
 
