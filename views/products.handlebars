@@ -1,7 +1,7 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
     <h2 class="margin">Products</h2>
 </div>
-{{#if is_admin}}
+
 <div id="output">
   <div class="table-responsive">
         <div class="form-group pull-left">
@@ -16,15 +16,20 @@
                 <tr id="table1" id="Heading">
                     <th id="table1">Product Name</th>
                     <th id="table1">Category Name</th>
+                    {{#if is_admin}}
                     <th id="table1"></th>
                     <th id="table1">
-                        <a style="color:white" class="btn btn-success btn-block" href="/products/add">
-                            <span class="glyphicon glyphicon-plus"></span> Add a Product
-                        </a>
+                      <a style="color:white" class="btn btn-success btn-block" href="/products/add">
+                        <span class="glyphicon glyphicon-plus">
+                        </span> Add a Product
+                      </a>
                     </th>
+                    {{else}}
+                    <th id="table1"></th>
+                    {{/if}}
                 </tr>
                 <tr id="table1" class="warning no-result">
-                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
+                  <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
                 </tr>
             </thead>
             <tbody>
@@ -32,88 +37,31 @@
                     {{#products}}
                         <td id="table1">{{Product}}</td>
                         <td id="table1">{{Category}}</td>
+                        {{#if ../is_admin}}
                         <td id="table1" class="para">
                             <strong>
-                              <span style="color:#00adc8"><a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                              <span style="color:#00adc8">
+                                <a type="button" class="btn btn-raised btn-warning" href="/products/edit/{{id}}">
+                                  <span class="glyphicon glyphicon-edit"></span> Edit
+                                </a>
                               </span>
                             </strong>
                         </td>
-
-                        <!-- <td id="table1" class="para">
+                        <td id="table1" class="para">
                             <a type="button" class="btn btn-danger" href="/products/delete/{{id}}">
                                 <span class="glyphicon glyphicon-trash"></span> Delete
                             </a>
-                        </td> -->
-
-                        <td id="table1" class="warning">
-                            <input type="button" value="Delete" class="btn btn-danger" id="btn_Delete1" href="/products/delete/{{id}}">
                         </td>
+                        {{else}}
+                        <td id="table1"></td>
+                        {{/if}}
+
                 </tr>
             </tbody>
             {{/products}}
         </table>
     </div>
 </div>
-
-{{else}}
-
-<div id="output">
-  <div class="table-responsive">
-        <div class="form-group pull-left">
-            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
-        </div>
-        <span class="counter pull-left"></span>
-        <p>
-
-        </p>
-        <table id="tttt" style="width:100%" class="table table-hover results">
-            <thead>
-                <tr id="table1" id="Heading">
-                    <th id="table1">Product Name</th>
-                    <th id="table1">Category Name</th>
-                </tr>
-                <tr id="table1" class="warning no-result">
-                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="table1">
-                    {{#products}}
-                        <td id="table1">{{Product}}</td>
-                        <td id="table1">{{Category}}</td>
-                </tr>
-            </tbody>
-            {{/products}}
-        </table>
-    </div>
-</div>
-{{/if}}
-<script type="text/javascript">
-$(document).ready(function () {
-$('body').on('click','td.warning input',function () {
-                swal({
-                    title: "Are you sure?",
-                    text: "This will also be deleted from your database!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn btn-raised btn-warning',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: "Cancel",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        swal("Deleted!", "Item Deleted!", "success");
-                    } else {
-                        swal("Cancelled", "Item will not be deleted", "error");
-                    }
-                });
-            });
-
-});
-
-</script>
 
 {{#no_products}}
     <p>No products available yet. Add some above.</p>

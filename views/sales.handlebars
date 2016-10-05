@@ -1,7 +1,7 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
   <h2 class="margin">Sales</h2>
 </div>
-{{#if is_admin}}
+
 <div id="output">
   <div class="table-responsive">
     <div class="form-group pull-left">
@@ -15,12 +15,15 @@
         <th id="table1">Quantity</th>
         <th id="table1">Price</th>
         <th id="table1">Product Name</th>
+        {{#if is_admin}}
         <th id="table1"></th>
         <th id="table1"><a style="color:white" class="btn btn-success btn-block" href="/sales/add">
           <span class="glyphicon glyphicon-plus"></span> Add a Sale
         </a>
       </th>
+      {{else}}
         <th id="table1"></th>
+      {{/if}}
       </tr>
       <tr id="table1" class="warning no-result">
         <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -32,54 +35,31 @@
         <td id="table1" id="des">{{Quantity}}</td>
         <td id="table1" id="des">R {{Price}}</td>
         <td id="table1" id="des"><span style="color:#ffb900">{{Product}}</span> </td>
-
-        <td id="table1" class="para"><strong><span style="color:#00adc8">
-          <a type="button" class="btn btn-warning" href="/sales/edit/{{id}}">
-          <span class="glyphicon glyphicon-edit"></span> Edit
-        </a></span></strong>
+        {{#if ../is_admin}}
+        <td id="table1" class="para">
+          <strong>
+            <span style="color:#00adc8">
+              <a type="button" class="btn btn-warning" href="/sales/edit/{{id}}">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+              </a>
+            </span>
+          </strong>
         </td>
 
-        <td colspan="2" id="table1" class="para"><a type="button" class="btn btn-danger" href="/sales/delete/{{id}}">
-        <span class="glyphicon glyphicon-trash"></span> Delete
-      </a>
+        <td colspan="2" id="table1" class="para">
+          <a type="button" class="btn btn-danger" href="/sales/delete/{{id}}">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+          </a>
         </td>
-      </tr>{{/sales}}
-    </table>
-  </div>
-</div>
-
-{{else}}
-
-<div id="output">
-  <div class="table-responsive">
-    <div class="form-group pull-left">
-        <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
-    </div>
-    <span class="counter pull-right"></span>
-    <table style="width:100%" class="table table-hover results">
-      <thead>
-      <tr id="table1" id="Heading">
-        <th id="table1">Date</th>
-        <th id="table1">Quantity</th>
-        <th id="table1">Price</th>
-        <th id="table1">Product Name</th>
-      </tr>
-      <tr id="table1" class="warning no-result">
-        <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
-      </tr>
-    </thead>
-      <tr id="table1">
-        {{#sales}}
-        <td id="table1" id="des">{{Date}}</td>
-        <td id="table1" id="des">{{Quantity}}</td>
-        <td id="table1" id="des">R {{Price}}</td>
-        <td id="table1" id="des"><span style="color:#ffb900">{{Product}}</span> </td>
+        {{else}}
+        <td id="table1"></td>
+        {{/if}}
       </tr>
       {{/sales}}
     </table>
   </div>
 </div>
-{{/if}}
+
 
 {{#no_sales}}
   <p>No sales available yet. Add some above.</p>

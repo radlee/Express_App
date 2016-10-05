@@ -2,88 +2,71 @@
     <h2 id="csricodexmlab_text" class="margin">Categories</h2>
 </div>
 
-{{#if is_admin}}
 <div id="output">
   <a id="table1" style="color:white" class="btn btn-success" href="/categories/add">
-      <span class="glyphicon glyphicon-plus"></span> Add a Category
-    </a>
+    <span class="glyphicon glyphicon-plus"></span> Add a Category
+  </a>
   <p></p>
   <div class="table-responsive">
-        <div class=" pull-left">
-            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
-            <span class="counter pull"></span>
-
-        </div>
-
-        <table style="width:100%" class="table table-hover results">
-            <thead>
-                <tr id="table1" id="Heading">
-                    <th id="table1">Category Name</th>
-                    <th id="table1">Edit Category</th>
-                    <th id="table1">
-                        <!-- <a id="button" class=btn name=submit value=Login type=submit
-                            onclick="checkBoxDemo()">
-                            <span class="glyphicon glyphicon-trash"></span> Delete selected
-                        </a> -->
-                        <P>
-                            <INPUT class="btn btn-raised btn-warning" name=submit value="Delete Selected" type=submit onclick="checkBoxDemo()">
-                        </P>
-                    </th>
-                </tr>
-                <tr id="table1" class="warning no-result">
-                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
-                </tr>
-            </thead>
-            <tr id="table1">
-                {{#categories}}
-                    <td id="table1" value="{{id}}">{{Category}}</td>
-                    <td id="table1" class="para"><strong><span style="color:#00adc8">
-          <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">
-          <span class="glyphicon glyphicon-edit"></span> Edit
-        </a></span></strong>
-                    </td>
-                    <td id="table1" class="para">
-                        <div class="checkbox">
-                            <label>
-                                <input id="checked" class="value" type="checkbox" value="{{id}}">
-                                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                            </label>
-                        </div>
-                    </td>
-            </tr>
-            {{/categories}}
-        </table>
+    <div class=" pull-left">
+      <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
+      <span class="counter pull"></span>
     </div>
+    <table style="width:100%" class="table table-hover results">
+      <thead>
+        <tr id="table1" id="Heading">
+          <th id="table1">Category Name</th>
+          {{#if is_admin}}
+          <th id="table1"></th>
+          <th id="table1"></th>
+          <th id="table1">
+            <!-- <a id="button" class=btn name=submit value=Login type=submit
+            onclick="checkBoxDemo()">
+            <span class="glyphicon glyphicon-trash"></span> Delete selected
+          </a> -->
+          <P>
+            <INPUT class="btn btn-raised btn-warning" name=submit value="Delete Selected" type=submit onclick="checkBoxDemo()">
+            </P>
+          </th>
+          {{else}}
+          <th id="table1"></th>
+          {{/if}}
+        </tr>
+        <tr id="table1" class="warning no-result">
+          <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
+        </tr>
+      </thead>
+      <tr id="table1">
+        {{#categories}}
+        <td id="table1" value="{{id}}">{{Category}}</td>
+        {{#if ../is_admin}}
+        <td id="table1" class="para">
+          <strong>
+            <span style="color:#00adc8">
+              <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+              </a>
+            </span>
+          </strong>
+        </td>
+        <td id="table1" class="para">
+          <div class="checkbox">
+            <label>
+              <input id="checked" class="value" type="checkbox" value="{{id}}">
+              <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            </label>
+          </div>
+        </td>
+        <td id="table1"></td>
+        {{else}}
+        <td id="table1"></td>
+        {{/if}}
+      </tr>
+      {{/categories}}
+    </table>
+  </div>
 </div>
 
-{{else}}
-
-<div id="output">
-  <div class="table-responsive">
-        <div class=" pull-left">
-            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
-            <span class="counter pull"></span>
-
-        </div>
-
-        <table style="width:100%" class="table table-hover results">
-            <thead>
-                <tr id="table1" id="Heading">
-                    <th id="table1">Category Name</th>
-                </tr>
-                <tr id="table1" class="warning no-result">
-                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
-                </tr>
-            </thead>
-            <tr id="table1">
-                {{#categories}}
-                    <td id="table1" value="{{id}}">{{Category}}</td>
-            </tr>
-            {{/categories}}
-        </table>
-    </div>
-</div>
-{{/if}}
 
 <!-- Scrip for when box is checked it deletes what is checked only  -->
 <script type="text/javascript">

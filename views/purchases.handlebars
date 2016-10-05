@@ -1,100 +1,68 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
-    <h2 class="margin">Purchases</h2>
+  <h2 class="margin">Purchases</h2>
 </div>
-
-{{#if is_admin}}
 
 <div id="output">
-    <div class="table-responsive">
-
-        <div class="form-group pull-left">
-            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
-        </div>
-        <span class="counter pull-right"></span>
-        <table style="width:100%" class="table table-hover results">
-            <thead>
-                <tr id="Heading">
-                    <th id="table1">Supplier</th>
-                    <th id="table1">Date</th>
-                    <th id="table1">Quantity</th>
-                    <th id="table1">Cost Per Item</th>
-                    <th id="table1">Product Name</th>
-                    <th id="table1" id="table12" colspan="2">
-                        <a style="color:white" class="btn btn-success btn-block" href="/purchases/add">
-                            <span class="glyphicon glyphicon-plus"></span> Add a Purchase
-                        </a>
-                    </th>
-                    <th id="table1"></th>
-                </tr>
-                <tr id="table1" class="warning no-result">
-                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
-                </tr>
-            </thead>
-            <tr id="table1">
-                {{#purchases}}
-                    <td id="table1">{{Shop}}</td>
-                    <td id="table1">{{Date}}</td>
-                    <td id="table1">{{Quantity}}</td>
-                    <td id="table1">R {{CostPerItem}}</td>
-                    <td id="table1">
-                        <span style="color:#ffb900">{{Product}}</span>
-                    </td>
-                    <td id="table1" class="para"><strong><span style="color:#00adc8">
-          <a type="button" class="btn btn-warning" href="/purchases/edit/{{id}}">
-          <span class="glyphicon glyphicon-edit"></span> Edit
-        </a></span></strong>
-                    </td>
-
-                    <td id="table1" class="para">
-                        <a type="button" class="btn btn-danger" href="/purchases/delete/{{id}}">
-                            <span class="glyphicon glyphicon-trash"></span> Delete
-                        </a>
-                    </td>
-            </tr>
-            {{/purchases}}
-        </table>
+  <div class="table-responsive">
+    <div class="form-group pull-left">
+      <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
     </div>
+    <span class="counter pull-right"></span>
+    <table style="width:100%" class="table table-hover results">
+      <thead>
+        <tr id="Heading">
+          <th id="table1">Supplier</th>
+          <th id="table1">Date</th>
+          <th id="table1">Quantity</th>
+          <th id="table1">Cost Per Item</th>
+          <th id="table1">Product Name</th>
+          {{#if is_admin}}
+          <th id="table1"></th>
+          <th id="table1" id="table12" colspan="2">
+            <a style="color:white" class="btn btn-success btn-block" href="/purchases/add">
+              <span class="glyphicon glyphicon-plus"></span> Add a Purchase
+            </a>
+          </th>
+          {{else}}
+          <th id="table1"></th>
+          {{/if}}
+        </tr>
+        <tr id="table1" class="warning no-result">
+          <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
+        </tr>
+      </thead>
+      <tr id="table1">
+        {{#purchases}}
+        <td id="table1">{{Shop}}</td>
+        <td id="table1">{{Date}}</td>
+        <td id="table1">{{Quantity}}</td>
+        <td id="table1">R {{CostPerItem}}</td>
+        <td id="table1">
+          <span style="color:#ffb900">{{Product}}</span>
+        </td>
+        {{#if ../is_admin}}
+        <td id="table1" class="para">
+          <strong>
+            <span style="color:#00adc8">
+              <a type="button" class="btn btn-warning" href="/purchases/edit/{{id}}">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+              </a>
+            </span>
+          </strong>
+        </td>
+        <td id="table1" class="para">
+          <a type="button" class="btn btn-danger" href="/purchases/delete/{{id}}">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+          </a>
+        </td>
+        {{else}}
+        <td id="table1"></td>
+        {{/if}}
+      </tr>
+      {{/purchases}}
+    </table>
+  </div>
 </div>
-
-{{else}}
-
-<div id="output">
-    <div class="table-responsive">
-
-        <div class="form-group pull-left">
-            <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
-        </div>
-        <span class="counter pull-right"></span>
-        <table style="width:100%" class="table table-hover results">
-            <thead>
-                <tr id="Heading">
-                    <th id="table1">Supplier</th>
-                    <th id="table1">Date</th>
-                    <th id="table1">Quantity</th>
-                    <th id="table1">Cost Per Item</th>
-                    <th id="table1">Product Name</th>
-                </tr>
-                <tr id="table1" class="warning no-result">
-                    <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
-                </tr>
-            </thead>
-            <tr id="table1">
-                {{#purchases}}
-                    <!-- <th id="des" class="info"><span style="color:#ffb900">ID#</span> : {{id}}</th> -->
-                    <td id="table1">{{Shop}}</td>
-                    <td id="table1">{{Date}}</td>
-                    <td id="table1">{{Quantity}}</td>
-                    <td id="table1">R {{CostPerItem}}</td>
-                    <td id="table1">
-                        <span style="color:#ffb900">{{Product}}</span>
-                    </td>
-            </tr>
-            {{/purchases}}
-        </table>
-    </div>
-</div>
-
-{{/if}}
 
 
 
