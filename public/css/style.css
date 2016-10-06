@@ -18,6 +18,12 @@ body {
 #table12{
   border-top-right-radius: 20px !important;
 }
+#success{
+  color: green;
+}
+label{
+  color: white;
+}
 /*SalesStats*/
 /*#output{
   padding: 20px;

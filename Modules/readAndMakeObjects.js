@@ -7,8 +7,14 @@ module.exports = function(file){
   listOfSplittedLines.forEach(function(line){
     var splittedLine = line.split(",");
     list.push(splittedLine);
+
+    var date = splittedLine[1] + -2016;
+    var date2 =  new Date(date);
+    var simpleDate = date2.getFullYear() + '/' + (date2.getMonth() + 1) + '/' + date2.getDate();
+
+
     var result = {
-      Date : splittedLine[1],
+      Date : simpleDate,
       Item : splittedLine[2],
       Quantity : Number(splittedLine[3]),
       Price : splittedLine[4]

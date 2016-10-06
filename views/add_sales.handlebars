@@ -7,7 +7,7 @@
     <form class="form_text" role="form" action="/sales/add" method="POST">
         <div class="form-group">
             <label for="des">Date</label>
-            <input type="date" class="form-control" name="Date" value="{{Date}}" placeholder="DD-MM">
+            <input type="date" id="datepicker" class="form-control" name="Date" value="{{Date}}" placeholder="DD-MM">
         </div>
         <div class="form-group">
             <label for="des">Quantity</label>
@@ -25,3 +25,17 @@
     </form>
 	</div>
 </div>
+
+<script type="text/javascript">
+             $(function () {
+
+                 var date = new Date();
+                 var currentMonth = date.getMonth();
+                 var currentDate = date.getDate();
+                 var currentYear = date.getFullYear();
+
+                 $('#datepicker').datepicker({
+                     maxDate: new Da3te(currentYear, currentMonth, currentDate)
+                 });
+             });
+    </script>

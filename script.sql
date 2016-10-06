@@ -24,7 +24,7 @@ CREATE TABLE Products(
 
 CREATE TABLE Sales(
   id INT PRIMARY KEY AUTO_INCREMENT,
-  Date char(50) NOT NULL,
+  Date date NOT NULL,
   Quantity INT,
   Price DECIMAL(4,2) NOT NULL,
   ProductID INT,
@@ -34,7 +34,7 @@ CREATE TABLE Sales(
 CREATE TABLE Purchases(
   id INT PRIMARY KEY AUTO_INCREMENT,
   Shop char(100) NOT NULL,
-  Date char(50) NOT NULL,
+  Date date NOT NULL,
   Quantity INT,
   CostPerItem DECIMAL(4,2) NOT NULL,
   ProductID INT,

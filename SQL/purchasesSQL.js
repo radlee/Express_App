@@ -21,15 +21,21 @@ listOfSplittedLines.forEach(function(line){
   var totalCost = splittedLine[5].replace(/R/g, "");
   var costPerItem  = costPerItem.replace(",", ".");
   var totalCost = totalCost.replace(",", ".");
+
+  var date = splittedLine[1] + -2016;
+  var date2 =  new Date(date);
+  var simpleDate = date2.getFullYear() + '/' + (date2.getMonth() + 1) + '/' + date2.getDate();
+
   var result = {
     Shop : splittedLine[0],
-    Date : splittedLine[1],
+    Date : simpleDate,
     Item : splittedLine[2],
     Quantity : quantity,
     CostPerItem : costPerItem,
   }
   listOfObjs.push(result);
 })
+console.log(listOfObjs);
 
 var productNamesAndProductIDs = [];
 connection.query("SELECT * FROM Products", function(err, Products){

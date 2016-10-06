@@ -6,7 +6,7 @@
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query('select Sales.id, Sales.Date, Sales.Quantity, Sales.Price, Products.Product from Sales inner join Products on Sales.ProductID = Products.id', [], function(err, results) {
+		connection.query("select DATE_FORMAT(Sales.Date,'%d %b %y') as Date, Sales.id, Sales.Quantity, Sales.Price, Products.Product from Sales inner join Products on Sales.ProductID = Products.id ORDER BY Sales.Date DESC", [], function(err, results) {
         if (err) return next(err);
 		res.render( 'sales', {
 				no_sales : results.length === 0,
@@ -37,6 +37,7 @@ exports.add = function (req, res, next) {
 
 	connection.query('insert into Sales set ?', data, function(err, results) {
 			if (err) return next(err);
+			req.flash("warning", 'Sale Added');
 		res.redirect('/sales');
 	});
 

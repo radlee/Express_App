@@ -6,7 +6,8 @@
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query('select Purchases.id, Purchases.Shop, Purchases.Date, Purchases.Quantity, Purchases.CostPerItem, Products.Product from Purchases inner join Products on Purchases.ProductID = Products.id', [], function(err, results) {
+		// SELECT DATE_FORMAT(purchases.Date,'%d %b %y') as Date,purchases.id, products.product, purchases.stockItem, purchases.quantity, purchases.cost ,purchases.shop FROM purchases, products WHERE purchases.product_id = products.id ORDER BY `purchases`.`Date` ASC
+		connection.query("select DATE_FORMAT(Purchases.Date,'%d %b %y') as Date, Purchases.id, Purchases.Shop, Purchases.Quantity, Purchases.CostPerItem, Products.Product from Purchases inner join Products on Purchases.ProductID = Products.id ORDER BY Purchases.Date DESC", [], function(err, results) {
         if (err) return next(err);
 		res.render( 'purchases', {
 				no_products : results.length === 0,
