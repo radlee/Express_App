@@ -103,11 +103,11 @@ exports.update = function(req, res, next){
   req.getConnection(function(err, connection){
 			connection.query('UPDATE Purchases SET ? WHERE id = ?', [data, id], function(err, rows){
     			if (err) next(err);
-          		res.redirect('/purchases');
-    		});
-
-    });
-};
+					req.flash("warning", 'Purchase Updated.');
+					res.redirect('/purchases');
+				});
+			});
+		};
 
 exports.delete = function(req, res, next){
 	var id = req.params.id;

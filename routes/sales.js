@@ -107,7 +107,8 @@ exports.update = function(req, res, next){
   req.getConnection(function(err, connection){
 			connection.query('UPDATE Sales SET ? WHERE id = ?', [data, id], function(err, data){
     			if (err) next(err);
-          		res.redirect('/sales');
+					req.flash("warning", 'Sale Updated.');
+					res.redirect('/sales');
     		});
     });
 };
