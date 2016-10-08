@@ -15,7 +15,7 @@ var mapOfProducts = readAndMakeObjects("../files/Week1.csv");
 
 var arrayOfCategories = getCategories(mapOfProducts);
 var productNamesAndCategoryNames = getProductNamesAndCategoryNames(arrayOfCategories);
-console.log(productNamesAndCategoryNames);
+
 var productNamesAndProductIDs = [];
 connection.query("SELECT * FROM Products", function(err, Products){
     if(err) return console.log(err);

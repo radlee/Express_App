@@ -16,7 +16,7 @@
     "express-flash": "git://github.com/RGBboy/express-flash.git",
     "express-handlebars": "^1.1.0",
     "express-myconnection": "^1.0.4",
-    "moment": "~2.14.1",
+    "moment": "^2.14.1",
     "mysql": "^2.5.3",
     "prompt": "^0.2.14",
     "sweetalert": "^1.1.3"

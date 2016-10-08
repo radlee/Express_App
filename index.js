@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express'),
     flash = require('express-flash'),
+    moment = require('moment'),
     exphbs  = require('express-handlebars'),
     mysql = require('mysql'),
     bcrypt = require('bcryptjs'),
@@ -16,6 +17,9 @@ var express = require('express'),
     mid = require('./middleware'),
     app = express();
 
+    moment().format();
+
+    
 var dbOptions = {
       host: 'localhost',
       user: 'root',

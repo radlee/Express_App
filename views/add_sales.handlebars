@@ -1,41 +1,28 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
     <h2 class="margin">Add Sales</h2>
-    <h3 id='warning'>{{messages.warning}}</h3>
+    <h4 id='warning'>{{messages.warning}}</h4>
+
 </div>
 <div class="divMan">
 	<div class="divBoy">
     <form class="form_text" role="form" action="/sales/add" method="POST">
         <div class="form-group">
             <label for="des">Date</label>
-            <input type="date" id="datepicker" class="form-control" name="Date" value="{{Date}}" placeholder="DD-MM">
+            <input type="date" class="form-control" name="Date" value="{{salesData.Date}}" placeholder="DD-MM">
         </div>
         <div class="form-group">
             <label for="des">Quantity</label>
-            <input type="text" class="form-control" name="Quantity" value="{{Quantity}}">
+            <input type="text" class="form-control" name="Quantity" value="{{salesData.Quantity}}">
         </div>
         <div class="form-group">
             <label for="des">Price</label>
-            <input type="text" class="form-control" name="Price" value="{{Price}}">
+            <input type="text" class="form-control" name="Price" value="{{salesData.Price}}">
         </div>
         <div class="form-group">
             <label for="des">Product ID</label>
-            <input type="text" class="form-control" name="ProductID" value="{{ProductID}}">
+            <input type="text" class="form-control" name="ProductID" value="{{salesData.ProductID}}">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 	</div>
 </div>
-
-<script type="text/javascript">
-             $(function () {
-
-                 var date = new Date();
-                 var currentMonth = date.getMonth();
-                 var currentDate = date.getDate();
-                 var currentYear = date.getFullYear();
-
-                 $('#datepicker').datepicker({
-                     maxDate: new Da3te(currentYear, currentMonth, currentDate)
-                 });
-             });
-    </script>
