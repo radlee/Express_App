@@ -1,8 +1,3 @@
-
-/***
- * A very basic CRUD example using MySQL
- */
-
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);

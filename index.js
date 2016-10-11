@@ -19,7 +19,7 @@ var express = require('express'),
 
     moment().format();
 
-    
+
 var dbOptions = {
       host: 'localhost',
       user: 'root',
@@ -147,39 +147,39 @@ function errorHandler(err, req, res, next) {
 }
 
 app.get('/categories',mid.requiresLogin, categories.show);
-app.get('/categories/add',mid.requiresLogin, categories.showAdd);
-app.get('/categories/edit/:id',mid.requiresLogin, categories.get);
-app.post('/categories/update/:id',mid.requiresLogin, categories.update);
-app.post('/categories/add',mid.requiresLogin, categories.add);
-app.get('/categories/check/:id',mid.requiresLogin, categories.check);
+app.get('/categories/add',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.showAdd);
+app.get('/categories/edit/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.get);
+app.post('/categories/update/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.update);
+app.post('/categories/add',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.add);
+app.get('/categories/check/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.check);
 
 app.get('/products',mid.requiresLogin, products.show);
-app.get('/products/edit/:id',mid.requiresLogin, products.get);
-app.post('/products/update/:id',mid.requiresLogin, products.update);
-app.get('/products/add',mid.requiresLogin, products.showAdd);
-app.post('/products/add',mid.requiresLogin, products.add);
-app.get('/products/delete/:id',mid.requiresLogin, products.delete);
+app.get('/products/edit/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, products.get);
+app.post('/products/update/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, products.update);
+app.get('/products/add',mid.requiresLogin,mid.requiresLoginAsAdmin, products.showAdd);
+app.post('/products/add',mid.requiresLogin,mid.requiresLoginAsAdmin, products.add);
+app.get('/products/delete/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, products.delete);
 
 app.get('/sales',mid.requiresLogin, sales.show);
-app.get('/sales/add',mid.requiresLogin, sales.showAdd);
-app.get('/sales/edit/:id',mid.requiresLogin, sales.get);
-app.post('/sales/update/:id',mid.requiresLogin, sales.update);
-app.post('/sales/add',mid.requiresLogin, sales.add);
-app.get('/sales/delete/:id',mid.requiresLogin, sales.delete);
+app.get('/sales/add',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.showAdd);
+app.get('/sales/edit/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.get);
+app.post('/sales/update/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.update);
+app.post('/sales/add',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.add);
+app.get('/sales/delete/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.delete);
 
 app.get('/purchases',mid.requiresLogin, purchases.show);
-app.get('/purchases/add',mid.requiresLogin, purchases.showAdd);
-app.get('/purchases/edit/:id',mid.requiresLogin, purchases.get);
-app.post('/purchases/update/:id',mid.requiresLogin, purchases.update);
-app.post('/purchases/add',mid.requiresLogin, purchases.add);
-app.get('/purchases/delete/:id',mid.requiresLogin, purchases.delete);
+app.get('/purchases/add',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.showAdd);
+app.get('/purchases/edit/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.get);
+app.post('/purchases/update/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.update);
+app.post('/purchases/add',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.add);
+app.get('/purchases/delete/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.delete);
 
 app.get('/users',mid.requiresLogin, mid.requiresLoginAsAdmin, users.show);
-app.get('/users/add',mid.requiresLoginAsAdmin, users.showAdd);
-app.post('/users/add',mid.requiresLoginAsAdmin, users.add);
-app.get('/users/edit/:user_id',mid.requiresLoginAsAdmin, users.get);
-app.post('/users/update/:user_id',mid.requiresLoginAsAdmin, users.update);
-app.get('/users/delete/:user_id',mid.requiresLoginAsAdmin, users.delete);
+app.get('/users/add',mid.requiresLogin,mid.requiresLoginAsAdmin, users.showAdd);
+app.post('/users/add',mid.requiresLogin,mid.requiresLoginAsAdmin, users.add);
+app.get('/users/edit/:user_id',mid.requiresLogin,mid.requiresLoginAsAdmin, users.get);
+app.post('/users/update/:user_id',mid.requiresLogin,mid.requiresLoginAsAdmin, users.update);
+app.get('/users/delete/:user_id',mid.requiresLogin,mid.requiresLoginAsAdmin, users.delete);
 
 app.get('/:week_name',mid.requiresLogin, stats.show);
 app.use(errorHandler);

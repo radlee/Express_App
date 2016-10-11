@@ -21,8 +21,15 @@ exports.authenticate = function(req, res, next) {
   });
 };
 
+const showAddScreen = function(req, res, userData){
+	res.render('register', {user: req.session.user,
+		is_admin: req.session.user.is_admin,
+		userData : userData
+	});
+}
+
 exports.showAdd = function(req, res) {
-  res.render('add_user');
+  showAddScreen(req, res, {});
 }
 
 var rolesMap = {
