@@ -50,36 +50,24 @@ exports.add = function(req, res, next) {
       });
 
     if(req.body.email && req.body.username && req.body.password && req.body.password_confirm){
-      // console.log(input);
-      // input.forEach(function(item){
-      //   if(item.email === req.body.email){
-      //     console.log("SAME-EMAIL");
-      //   }
-      //   if(item.name === req.body.username){
-      //     // req.flash("warning", 'Username Already Taken');
-      //     // return res.redirect("/register");
-      //     console.log("SAME-NAME");
-      //   }
-      //
-      // })
-        if(req.body.password !== req.body.password_confirm){
-          req.flash("warning", 'Passwords do not match.');
-          return res.redirect("/register");
-        }
-        req.session.user = {
-          name : req.body.username,
-          is_admin : rolesMap[req.body.username] === "admin",
-          user : rolesMap[req.body.username] === "user"
-        };
-        var userData = {
-          email : req.body.email,
-          username : req.body.username,
-          password : req.body.password
-        };
+      var userData = {
+        email : req.body.email,
+        username : req.body.username,
+        password : req.body.password
+      };
+      req.session.user = {
+        name : req.body.username,
+        is_admin : rolesMap[req.body.username] === "admin",
+        user : rolesMap[req.body.username] === "user"
+      };
+      if(req.body.password !== req.body.password_confirm){
+        req.flash("warning", 'Passwords do not match.');
+        return res.render("register", {userData : userData});
+      }
     }
     else{
       req.flash("warning", '* All fields required *');
-      return res.redirect("/register");
+      return res.render("register", {userData : userData});
     }
       connection.query('insert into Users set ?', [userData], function(err, results) {
         if (err) return next(err);

@@ -25,7 +25,7 @@
             <span class="glyphicon glyphicon-trash"></span> Delete selected
           </a> -->
           <P>
-            <INPUT class="btn btn-raised btn-warning" name=submit value="Delete Selected" type=submit onclick="checkBoxDemo()">
+            <INPUT id="remove" class="btn btn-raised btn-warning" name=submit value="Delete Selected" type=submit onclick="checkBoxDemo()">
             </P>
           </th>
           {{else}}
@@ -38,7 +38,7 @@
       </thead>
       <tr id="table1">
         {{#categories}}
-        <td id="table1" value="{{id}}">{{Category}}</td>
+        <td id="table1" name="Category" value="{{id}}" href="/categories/delete/{{id}}" >{{Category}}</td>
         {{#if ../is_admin}}
         <td id="table1" class="para">
           <strong>
@@ -52,7 +52,7 @@
         <td id="table1" class="para">
           <div class="checkbox">
             <label>
-              <input id="checked" class="value" type="checkbox" value="{{id}}">
+              <input id="checked" class="value" type="checkbox" name="Category" value="{{id}}">
               <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
             </label>
           </div>
@@ -67,42 +67,13 @@
   </div>
 </div>
 
-
 <!-- Scrip for when box is checked it deletes what is checked only  -->
 <script type="text/javascript">
-function checkBoxDemo() {
-    if (document.getElementById('checked').checked) {
-        alert("hh");
-    }
-    // var btn = document.getElementById("button");
-    // btn.onclick = function(){
-    //
-    //   alert(this.id);
-    // };
-    // function validate() {
-    //        if (document.getElementById('checked').checked) {
-    //            alert("checked");
-    //        } else {
-    //            alert("You didn't check it! Let me check it for you.");
-    //        }
-    //    }
-    // var x = document.getElementById('checked');
-    // x.checked = function(){
-    //   alert(this.id)
-    // }
-    // var btn = document.getElementById("button");
-    // btn.onclick = function(){
-    //
-    //   alert(this.id);
-    // };
-    // $(document).ready(function() {
-    //   $("checked").checked(function () {
-    //     var list = [];
-    //     var checkedOne = $("checked").val('value');
-    //     list.push(checkedOne);
-    //     alert(list);
-    //     }
-    // });
+$(document).ready(function () {
+    $("#remove").on("click", function () {
+        $('table tr').has('input[name="Category"]:checked').remove()
+    })
+});
 </script>
 
 {{#no_categories}}

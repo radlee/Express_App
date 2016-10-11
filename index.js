@@ -68,6 +68,7 @@ app.use(bodyParser.json())
 app.get("/register", mid.loggedOut, function(req, res, next){
   res.render("register");
 });
+
 app.get("/login",mid.loggedOut, function(req, res) {
   res.render("login", {
     showNavBar: false
