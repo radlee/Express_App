@@ -21,8 +21,21 @@ const showAddScreen = function(req, res, salesData){
 }
 
 exports.showAdd = function(req, res){
-	showAddScreen(req, res, {});
-
+	var id = req.params.id;
+	req.getConnection(function(err, connection){
+		connection.query('SELECT * FROM Products', [id], function(err,products){
+			if(err) return next(err);
+			connection.query('SELECT * FROM Sales WHERE id = ?', [id], function(err, sales){
+				if(err) return next(err);
+				var sale = sales[0];
+				products = products.map(function(product){
+					product.selected = product.id === sale.ProductID ? "selected" : "";
+					return product;
+				});
+				showAddScreen(req, res, {});
+			})
+		});
+	});
 }
 //
 exports.add = function (req, res, next) {
@@ -46,7 +59,7 @@ exports.add = function (req, res, next) {
 			Date : input.Date,
 			Quantity : input.Quantity,
 			Price : input.Price,
-			ProductID : input.ProductID
+			Product : input.Product
 		};
 
 	connection.query('insert into Sales set ?', data, function(err, results) {
@@ -61,17 +74,24 @@ exports.add = function (req, res, next) {
 exports.get = function(req, res, next){
 	var id = req.params.id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM Sales WHERE id = ?', [id], function(err,rows){
+		connection.query('SELECT * FROM Products', [id], function(err,products){
 			if(err) return next(err);
-			// Possible Problem -------------
-			res.render('edit_sales',
-			{
-				data : rows[0], user: req.session.user,
-				is_admin : req.session.user.is_admin
-			});
+			connection.query('SELECT * FROM Sales WHERE id = ?', [id], function(err, sales){
+				if(err) return next(err);
+				var sale = sales[0];
+				products = products.map(function(product){
+					product.selected = product.id === sale.ProductID ? "selected" : "";
+					return product;
+				});
+				res.render('edit_sales',{
+					products : products,
+					data : sale,
+					user: req.session.user,
+					is_admin : req.session.user.is_admin
+				});
+			})
+		});
 	});
-});
-
 };
 
 

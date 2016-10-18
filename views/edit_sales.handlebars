@@ -8,8 +8,15 @@
 
 	<div class="form-group">
 		<label for="des">Product ID</label>
-		<input type="text" required placeholder="Product ID cannot be greater than the number of prodcuts in the database table" class="form-control" name="ProductID" value="{{data.ProductID}}">
-		<!-- or id -->
+
+    <select id="btn-primary2" class="form-control" name="ProductID">
+      {{#products}}
+      <option  value="{{data.id}}">{{Product}}</option>
+      {{/products}}
+    </select>
+
+
+    <!-- or id -->
 	</div>
 
 	<div class="form-group">
