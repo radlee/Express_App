@@ -404,10 +404,11 @@ table {
   border: 1px solid white !important;
 }
 #btn-primary2 {
-  border: 1px solid green !important;
+  border: 1px solid white !important;
+  text-align: center !important;
+  font-size: 15px !important;
   border-top-right-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
-  font-size: 20px;
 }
 .info_div{
   background-color: black;

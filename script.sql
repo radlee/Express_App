@@ -15,7 +15,7 @@ CREATE TABLE Categories(
 );
 
 CREATE TABLE Products(
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  Product_ID INT PRIMARY KEY AUTO_INCREMENT,
   Product char(100) NOT NULL,
   CategoryID INT,
   FOREIGN KEY (CategoryID) REFERENCES Categories (id),
@@ -23,22 +23,22 @@ CREATE TABLE Products(
 );
 
 CREATE TABLE Sales(
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  Sales_ID INT PRIMARY KEY AUTO_INCREMENT,
   Date date NOT NULL,
   Quantity INT,
   Price DECIMAL(4,2) NOT NULL,
-  ProductID INT,
-  FOREIGN KEY (ProductID) REFERENCES Products (id)
+  Product_ID INT,
+  FOREIGN KEY (Product_ID) REFERENCES Products (Product_ID)
   -- CONSTRAINT uc_Sales UNIQUE (ProductID)
 );
 CREATE TABLE Purchases(
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  Purchases_ID INT PRIMARY KEY AUTO_INCREMENT,
   Shop char(100) NOT NULL,
   Date date NOT NULL,
   Quantity INT,
   CostPerItem DECIMAL(4,2) NOT NULL,
   ProductID INT,
-  FOREIGN KEY (ProductID) REFERENCES Products (id)
+  FOREIGN KEY (ProductID) REFERENCES Products (Product_ID)
 );
 CREATE TABLE Users(
   user_id INT PRIMARY KEY AUTO_INCREMENT,

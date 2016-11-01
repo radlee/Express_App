@@ -4,18 +4,16 @@
 </div>
 <div class="divMan">
 	<div class="divBoy">
-<form class="form_text" role="form" action="/sales/update/{{data.id}}" method="POST">
+<form class="form_text" role="form" action="/sales/update/{{data.Sales_ID}}" method="POST">
 
 	<div class="form-group">
 		<label for="des">Product ID</label>
 
-    <select id="btn-primary2" class="form-control" name="ProductID">
+    <select id="btn-primary2" class="form-control" name="Product_ID">
       {{#products}}
-      <option  value="{{data.id}}">{{Product}}</option>
+      <option {{selected}} value="{{Product_ID}}">{{Product}}</option>
       {{/products}}
     </select>
-
-
     <!-- or id -->
 	</div>
 

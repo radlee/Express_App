@@ -22,10 +22,14 @@
 			<label for="des">Cost Per Item</label>
 			<input type="text" class="form-control" name="CostPerItem" value="{{purchasesData.CostPerItem}}">
 		</div>
-		<div class="form-group">
-			<label for="des">Product ID</label>
-			<input type="text" class="form-control" name="ProductID" value="{{purchasesData.ProductID}}">
-		</div>
+    <div class="form-group">
+  		<label for="des">Product ID</label>
+      <select id="btn-primary2" class="" name="Product_ID">
+        {{#products}}
+        <option  value="{{Product_ID}}">{{Product}}</option>
+        {{/products}}
+      </select>
+  	</div>
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
 </div>

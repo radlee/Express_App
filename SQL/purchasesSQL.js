@@ -44,7 +44,7 @@ connection.query("SELECT * FROM Products", function(err, Products){
   Products.forEach(function(item){
     var result = {
       Product : item.Product,
-      ProductID : item.id
+      ProductID : item.Product_ID
     }
     productNamesAndProductIDs.push(result);
   })
@@ -56,7 +56,7 @@ connection.query("SELECT * FROM Products", function(err, Products){
         var result = {
           Shop : item.Shop,
           Product : item2.Product,
-          ProductID : item2.ProductID,
+          Product_ID : item2.ProductID,
           Date : item.Date,
           Quantity : item.Quantity,
           CostPerItem : item.CostPerItem,
@@ -69,10 +69,11 @@ connection.query("SELECT * FROM Products", function(err, Products){
   //Making a list of a LIST ----
   purchasesStats.forEach(function(item){
     var result = [
-      item.Shop, item.Date, item.Quantity, item.CostPerItem, item.ProductID
+      item.Shop, item.Date, item.Quantity, item.CostPerItem, item.Product_ID
     ]
     values.push(result);
   })
+  console.log(values);
 
   connection.query("INSERT INTO Purchases (Shop, Date, Quantity, CostPerItem, ProductID) VALUES ?", [values], function(err){
     if(err) throw err;

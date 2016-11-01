@@ -1,7 +1,7 @@
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query("select DATE_FORMAT(Sales.Date,'%d %b %y') as Date, Sales.id, Sales.Quantity, Sales.Price, Products.Product from Sales inner join Products on Sales.ProductID = Products.id ORDER BY Sales.Date DESC", [], function(err, results) {
+		connection.query("select DATE_FORMAT(Sales.Date,'%Y-%m-%d') as Date, Sales.Sales_ID, Sales.Quantity, Sales.Price, Products.Product from Sales inner join Products on Sales.Product_ID = Products.Product_ID ORDER BY Sales.Date DESC", [], function(err, results) {
         if (err) return next(err);
 		res.render( 'sales', {
 				no_sales : results.length === 0,
@@ -25,15 +25,7 @@ exports.showAdd = function(req, res){
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM Products', [id], function(err,products){
 			if(err) return next(err);
-			connection.query('SELECT * FROM Sales WHERE id = ?', [id], function(err, sales){
-				if(err) return next(err);
-				var sale = sales[0];
-				products = products.map(function(product){
-					product.selected = product.id === sale.ProductID ? "selected" : "";
-					return product;
-				});
-				showAddScreen(req, res, {});
-			})
+			showAddScreen(req, res, {})
 		});
 	});
 }
@@ -72,15 +64,16 @@ exports.add = function (req, res, next) {
 };
 
 exports.get = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.Sales_ID;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM Products', [id], function(err,products){
+		connection.query('SELECT * FROM Products', [], function(err,products){
 			if(err) return next(err);
-			connection.query('SELECT * FROM Sales WHERE id = ?', [id], function(err, sales){
+			// "SELECT Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%d/%m/%Y') as Date from Sales WHERE Sales_ID = ?"
+			connection.query("SELECT Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%Y-%m-%d') as Date from Sales WHERE Sales_ID = ?", [id], function(err, sales){
 				if(err) return next(err);
 				var sale = sales[0];
 				products = products.map(function(product){
-					product.selected = product.id === sale.ProductID ? "selected" : "";
+					product.selected = product.Product_ID === sale.Product_ID ? "selected" : "";
 					return product;
 				});
 				res.render('edit_sales',{

@@ -41,7 +41,9 @@ exports.get = function(req, res, next){
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM Categories WHERE id = ?', [id], function(err,rows){
 			if(err) return next(err);
-			res.render('edit_category',{page_title:"Edit Customers - Node.js", data : rows[0], user: req.session.user,
+			res.render('edit_category',{page_title:"Edit Customers - Node.js",
+			 data : rows[0],
+			 user: req.session.user,
 			is_admin: req.session.user.is_admin});
 		});
 	});

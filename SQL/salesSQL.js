@@ -23,7 +23,7 @@ connection.query("SELECT * FROM Products", function(err, Products){
     Products.forEach(function(item){
       var result = {
         Product : item.Product,
-        ProductID : item.id
+        ProductID : item.Product_ID
       }
       productNamesAndProductIDs.push(result);
     });
@@ -53,7 +53,7 @@ connection.query("SELECT * FROM Products", function(err, Products){
       checkDuplicates[item.ProductName] = item.ProductID;
       mapOfProductsAndProductID.push({
         // ProductName : item.ProductName,
-        ProductID : item.ProductID,
+        Product_ID : item.ProductID,
         SaleDate : item.SaleDate,
         Quantity : item.Quantity,
         Price : item.Price
@@ -63,13 +63,11 @@ connection.query("SELECT * FROM Products", function(err, Products){
     var values = [];
   mapOfProductsAndProductID.forEach(function(item){
       var result =[
-        item.SaleDate, item.Quantity, item.Price, item.ProductID
+        item.SaleDate, item.Quantity, item.Price, item.Product_ID
       ]
       values.push(result)
     });
-
-
-    connection.query("INSERT INTO Sales (Date, Quantity, Price, ProductID) VALUES ?", [values], function(err){
+    connection.query("INSERT INTO Sales (Date, Quantity, Price, Product_ID) VALUES ?", [values], function(err){
         if(err) throw err;
       });
       connection.query("SELECT * FROM Sales", function(err, result){
