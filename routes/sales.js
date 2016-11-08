@@ -14,36 +14,35 @@ exports.show = function (req, res, next) {
 };
 
 const showAddScreen = function(req, res, salesData){
-	res.render('add_sales', {user: req.session.user,
-		is_admin: req.session.user.is_admin,
-		salesData : salesData
-	});
-}
-
-exports.showAdd = function(req, res){
-	var id = req.params.id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM Products', [id], function(err,products){
-			if(err) return next(err);
-			showAddScreen(req, res, {})
+		connection.query("SELECT * FROM Products", [], function(err, products){
+			res.render('add_sales', {
+				user: req.session.user,
+				is_admin: req.session.user.is_admin,
+				salesData : salesData,
+				products : products
+			});
 		});
 	});
 }
-//
+exports.showAdd = function(req, res){
+			showAddScreen(req, res, {})
+}
+
 exports.add = function (req, res, next) {
 	var moment = require('moment');
 	moment().format();
-
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
 		var input = req.body;
+		console.log("Intput ----------------");
+		console.log(input);
 		var error = false;
 		const todayOrEarlier = moment(input.Date).isSameOrBefore(moment());
 		if(!todayOrEarlier){
 			req.flash("warning", 'Sale date can not be after today.');
 			error = true;
 		}
-
 		if(error){
 			return showAddScreen(req, res, input);
 		}
@@ -51,25 +50,22 @@ exports.add = function (req, res, next) {
 			Date : input.Date,
 			Quantity : input.Quantity,
 			Price : input.Price,
-			Product : input.Product
+			Product_ID : input.id
 		};
-
-	connection.query('insert into Sales set ?', data, function(err, results) {
+		console.log(data);
+	connection.query('insert into Sales set ?', [data], function(err, results) {
 			if (err) return next(err);
 			req.flash("warning", 'Sale Added.');
-		res.redirect('/sales');
-	});
-
+			res.redirect('/sales');
+		});
 	});
 };
-
 exports.get = function(req, res, next){
 	var id = req.params.Sales_ID;
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM Products', [], function(err,products){
 			if(err) return next(err);
-			// "SELECT Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%d/%m/%Y') as Date from Sales WHERE Sales_ID = ?"
-			connection.query("SELECT Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%Y-%m-%d') as Date from Sales WHERE Sales_ID = ?", [id], function(err, sales){
+			connection.query("SELECT Sales.Sales_ID, Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%Y-%m-%d') as Date from Sales WHERE Sales_ID = ?", [id], function(err, sales){
 				if(err) return next(err);
 				var sale = sales[0];
 				products = products.map(function(product){
@@ -87,21 +83,33 @@ exports.get = function(req, res, next){
 	});
 };
 
-
 const showEditScreen = function(req, res, data){
-	res.render('edit_sales', {user: req.session.user,
-		is_admin: req.session.user.is_admin,
-		data : data
+	var id = req.params.Sales_ID;
+	req.getConnection(function(err, connection){
+		connection.query('SELECT * FROM Products', [], function(err,products){
+			if(err) return next(err);
+			connection.query("SELECT Sales.Sales_ID, Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%Y-%m-%d') as Date from Sales WHERE Sales_ID = ?", [id], function(err, sales){
+				if(err) return next(err);
+				var sale = sales[0];
+				products = products.map(function(product){
+					product.selected = product.Product_ID === sale.Product_ID ? "selected" : "";
+					return product;
+				});
+				res.render('edit_sales', {
+					user: req.session.user,
+					is_admin: req.session.user.is_admin,
+					products : products,
+					data : data
+				});
+			})
+		});
 	});
 }
-
 exports.update = function(req, res, next){
 	var moment = require('moment');
 	moment().format();
-
   var data = req.body;
-  var id = req.params.id;
-
+  var id = req.params.Sales_ID;
 	var error = false;
 	const todayOrEarlier = moment(data.Date).isSameOrBefore(moment());
 	if(!todayOrEarlier){
@@ -111,20 +119,18 @@ exports.update = function(req, res, next){
 	if(error){
 		return showEditScreen(req, res, data, id);
 	}
-
   req.getConnection(function(err, connection){
-			connection.query('UPDATE Sales SET ? WHERE id = ?', [data, id], function(err, data){
-    			if (err) next(err);
+			connection.query('UPDATE Sales SET ? WHERE Sales_ID = ?', [data, id], function(err, data){
+    			if (err) return next(err);
 					req.flash("warning", 'Sale Updated.');
 					res.redirect('/sales');
     		});
     });
 };
-
 exports.delete = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.Sales_ID;
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM Sales WHERE id = ?', [id], function(err, data){
+		connection.query('DELETE FROM Sales WHERE Sales_ID = ?', [id], function(err, data){
 			if(err) return next(err);
 			res.redirect('/sales');
 		});

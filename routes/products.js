@@ -22,9 +22,9 @@ exports.showAdd = function(req, res){
 					categories : categories, user: req.session.user,
 					is_admin: req.session.user.is_admin
     		});
-      	});
-	});
-};
+			});
+		});
+	};
 
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
@@ -32,11 +32,7 @@ exports.add = function (req, res, next) {
 		var data = {
 			CategoryID : Number(req.body.CategoryID),
       		Product : req.body.Product
-			// Price : Number(req.body.Price)
   		};
-			console.log("Data added ");
-			console.log(data);
-
 		connection.query('insert into Products set ?', data, function(err, results) {
   			if (err) return next(err);
 				res.redirect('/products');
@@ -67,29 +63,24 @@ exports.get = function(req, res, next){
 };
 
 exports.update = function(req, res, next){
-
 	var data = {
-		// CategoryID : Number(req.body.CategoryID),
+		CategoryID : Number(req.body.CategoryID),
 		Product : req.body.Product,
-		// Price : Number(req.body.Price)
 	};
-  	var id = req.params.id;
+  	var id = req.params.Product_ID;
   	req.getConnection(function(err, connection){
 		if (err) return next(err);
 		connection.query('UPDATE Products SET ? WHERE Product_ID = ?', [data, id], function(err, rows){
 			if (err) return next(err);
       		res.redirect('/products');
-		});
-    });
-};
+				});
+			});
+		};
 
 exports.delete = function(req, res, next){
 	var ids = [];
 	var id = req.params.id;
-	console.log("Deleted by this id ");
 	ids.push(id);
-	console.log(ids);
-
 	req.getConnection(function(err, connection){
 		connection.query('DELETE FROM Products WHERE id = ?', [ids], function(err,rows){
 			if(err) return next(err);

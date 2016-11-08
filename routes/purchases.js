@@ -13,9 +13,14 @@ exports.show = function (req, res, next) {
 	});
 };
 const showAddScreen = function(req, res, purchasesData){
-	res.render('add_purchases', {user: req.session.user,
-		is_admin: req.session.user.is_admin,
-		purchasesData : purchasesData
+	req.getConnection(function(err, connection){
+		connection.query("SELECT * FROM Products", [], function(err, products){
+			res.render('add_purchases', {user: req.session.user,
+				is_admin: req.session.user.is_admin,
+				purchasesData : purchasesData,
+				products : products
+			});
+		});
 	});
 }
 exports.showAdd = function(req, res){
@@ -41,9 +46,10 @@ exports.add = function (req, res, next) {
 			Date : input.Date,
 			Quantity : input.Quantity,
 			CostPerItem: input.CostPerItem,
-			ProductID : input.ProductID
+			ProductID : input.id
 		};
-	connection.query('insert into Purchases set ?', data, function(err, results) {
+		console.log(data);
+	connection.query('insert into Purchases set ?', [data], function(err, results) {
 			if (err) return next(err);
 			req.flash("warning", 'Purchase Added.');
 			res.redirect('/purchases');
@@ -55,8 +61,7 @@ exports.get = function(req, res, next){
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM Products', [], function(err, products){
 			if(err) return next(err);
-			//SELECT Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%d/%m/%Y') as Date from Sales WHERE Sales_ID = ?
-			connection.query("SELECT Purchases.Shop, Purchases.ProductID, Purchases.Quantity, Purchases.CostPerItem, DATE_FORMAT(Purchases.Date, '%Y-%m-%d') as Date from Purchases WHERE Purchases_ID = ?", [id], function(err, purchases){
+			connection.query("SELECT Purchases.Purchases_ID, Purchases.Shop, Purchases.ProductID, Purchases.Quantity, Purchases.CostPerItem, DATE_FORMAT(Purchases.Date, '%Y-%m-%d') as Date from Purchases WHERE Purchases_ID = ?", [id], function(err, purchases){
 				if(err) return next(err);
 				var purchase = purchases[0];
 				products = products.map(function(product){
@@ -82,7 +87,7 @@ exports.update = function(req, res, next){
 	var moment = require('moment');
 	moment().format();
   var data = req.body;
-  var id = req.params.id;
+  var id = req.params.Purchases_ID;
 	var error = false;
 	const todayOrEarlier = moment(data.Date).isSameOrBefore(moment());
 	if(!todayOrEarlier){
@@ -93,17 +98,17 @@ exports.update = function(req, res, next){
 		return showEditScreen(req, res, data, id);
 	}
 	req.getConnection(function(err, connection){
-			connection.query('UPDATE Purchases SET ? WHERE id = ?', [data, id], function(err, rows){
-    			if (err) next(err);
+			connection.query('UPDATE Purchases SET ? WHERE Purchases_ID = ?', [data, id], function(err, data){
+					if (err) return next(err);
 					req.flash("warning", 'Purchase Updated.');
 					res.redirect('/purchases');
 				});
 			});
 		};
 exports.delete = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.Purchases_ID;
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM Purchases WHERE id = ?', [id], function(err,rows){
+		connection.query('DELETE FROM Purchases WHERE Purchases_ID = ?', [id], function(err,data){
 			if(err) return next(err);
 			res.redirect('/purchases');
 		});
