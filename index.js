@@ -161,14 +161,14 @@ app.get('/products/add',mid.requiresLogin,mid.requiresLoginAsAdmin, products.sho
 app.post('/products/add',mid.requiresLogin,mid.requiresLoginAsAdmin, products.add);
 app.get('/products/delete/:Product_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, products.delete);
 
-app.get('/sales',mid.requiresLogin, sales.show);
+app.get('/sales',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.show);
 app.get('/sales/add',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.showAdd);
 app.get('/sales/edit/:Sales_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.get);
 app.post('/sales/update/:Sales_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.update);
 app.post('/sales/add',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.add);
 app.get('/sales/delete/:Sales_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.delete);
 
-app.get('/purchases',mid.requiresLogin, purchases.show);
+app.get('/purchases',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.show);
 app.get('/purchases/add',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.showAdd);
 app.get('/purchases/edit/:Purchases_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.get);
 app.post('/purchases/update/:Purchases_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, purchases.update);

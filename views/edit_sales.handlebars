@@ -5,13 +5,13 @@
 <div class="divMan">
 	<div class="divBoy">
 <form class="form_text" role="form" action="/sales/update/{{data.Sales_ID}}" method="POST">
-
+  <input type="hidden" name="Sales_ID" value="{{data.Sales_ID}}">
 	<div class="form-group">
 		<label for="des">Product Name</label>
 
     <select id="btn-primary2" class="form-control" name="Product_ID">
       {{#products}}
-      <option {{selected}} value="{{data.Product_ID}}">{{Product}}</option>
+      <option {{selected}} value="{{Product_ID}}">{{Product}}</option>
       {{/products}}
     </select>
     <!-- or id -->

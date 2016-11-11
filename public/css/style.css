@@ -218,8 +218,8 @@ fieldset{
 .form-control {
   background-color: #044052 !important;
   border-radius: 0px !important;
-  border-top-right-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
+  /*border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;*/
   border: 1px solid white !important;
   color: white !important;
   text-align: center !important;
@@ -235,6 +235,7 @@ fieldset{
   text-align: center;
   /*padding: 20px;*/
   width: 50%;
+  margin: auto;
 }
 
 .checkbox .cr,
@@ -248,6 +249,7 @@ fieldset{
   float: left;
   margin-right: .5em;
 }
+select { text-indent: 270px; }
 
 .radio .cr {
   border-radius: 50%;
@@ -407,8 +409,6 @@ table {
   border: 1px solid white !important;
   text-align: center !important;
   font-size: 15px !important;
-  border-top-right-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
 }
 .info_div{
   background-color: black;

@@ -72,8 +72,10 @@
 					</li>
 					<li><a href="/categories">Categories</a></li>
 					<li><a href="/products">Products</a></li>
+					{{#if is_admin}}
 					<li><a href="/sales">Sales</a></li>
 					<li><a href="/purchases">Purchases</a></li>
+					{{/if}}
 					<!-- <li><a href="/mobile">Mobile</a></li> -->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -82,7 +84,6 @@
 					{{/if}}
 	        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					{{else}}
-
 	        <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 	        <li><a href="/login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
 					{{/if}}
@@ -102,13 +103,13 @@
     	<a href="#"><i class="fa fa-linkedin-square fa-1x" aria-hidden="true"></i></a>
     	<a href="http://radlee.github.io"><i class="fa fa-github fa-1x" aria-hidden="true"></i></a>
 		</div>
-		<h6>© 2016 Nelisa Spaza Developped at CodeX</h6>
+		<h6>© 2016 Nelisa Spaza Developed at codeX</h6>
 </div>
 <!-- Javascript -->
 <script src="/js/jquery.backstretch.min.js"></script>
 <!-- Backstretch Background Image -->
 <script>
-$.backstretch(["/img/1.jpg"]);
+$.backstretch(["/img/code.jpg"]);
 </script>
 
 

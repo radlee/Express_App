@@ -35,8 +35,6 @@ exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
 		var input = req.body;
-		console.log("Intput ----------------");
-		console.log(input);
 		var error = false;
 		const todayOrEarlier = moment(input.Date).isSameOrBefore(moment());
 		if(!todayOrEarlier){
@@ -52,7 +50,6 @@ exports.add = function (req, res, next) {
 			Price : input.Price,
 			Product_ID : input.id
 		};
-		console.log(data);
 	connection.query('insert into Sales set ?', [data], function(err, results) {
 			if (err) return next(err);
 			req.flash("warning", 'Sale Added.');
@@ -67,6 +64,7 @@ exports.get = function(req, res, next){
 			if(err) return next(err);
 			connection.query("SELECT Sales.Sales_ID, Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%Y-%m-%d') as Date from Sales WHERE Sales_ID = ?", [id], function(err, sales){
 				if(err) return next(err);
+				console.log(products);
 				var sale = sales[0];
 				products = products.map(function(product){
 					product.selected = product.Product_ID === sale.Product_ID ? "selected" : "";
@@ -86,25 +84,40 @@ exports.get = function(req, res, next){
 const showEditScreen = function(req, res, data){
 	var id = req.params.Sales_ID;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM Products', [], function(err,products){
-			if(err) return next(err);
 			connection.query("SELECT Sales.Sales_ID, Sales.Product_ID,Sales.Quantity, Sales.Price, DATE_FORMAT(Sales.Date, '%Y-%m-%d') as Date from Sales WHERE Sales_ID = ?", [id], function(err, sales){
 				if(err) return next(err);
 				var sale = sales[0];
+				showEdit(req, res, sale);
+			});
+	});
+};
+
+const showEdit = function(req, res, sale){
+	var id = req.params.Sales_ID;
+	req.getConnection(function(err, connection){
+		connection.query('SELECT * FROM Products', [], function(err,products){
+			if(err) return next(err);
 				products = products.map(function(product){
-					product.selected = product.Product_ID === sale.Product_ID ? "selected" : "";
+					product.selected = product.Product_ID === Number(sale.Product_ID) ? "selected" : "";
 					return product;
 				});
 				res.render('edit_sales', {
 					user: req.session.user,
 					is_admin: req.session.user.is_admin,
 					products : products,
-					data : data
+					data : sale
 				});
-			})
 		});
 	});
 }
+
+const showError = function(req, res, data){
+	var data = req.body;
+	var id = req.params.Sales_ID;
+	showEdit(req, res, data);
+}
+
+//Get the date from the user and update the edit page
 exports.update = function(req, res, next){
 	var moment = require('moment');
 	moment().format();
@@ -117,7 +130,7 @@ exports.update = function(req, res, next){
 		error = true;
 	}
 	if(error){
-		return showEditScreen(req, res, data, id);
+		return showError(req, res, data);
 	}
   req.getConnection(function(err, connection){
 			connection.query('UPDATE Sales SET ? WHERE Sales_ID = ?', [data, id], function(err, data){
