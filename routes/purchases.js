@@ -78,11 +78,47 @@ exports.get = function(req, res, next){
 	});
 };
 const showEditScreen = function(req, res, data){
-	res.render('edit_purchases', {user: req.session.user,
-		is_admin: req.session.user.is_admin,
-		data : data
+	var id = req.params.Purchases_ID;
+	req.getConnection(function(err, connection){
+			connection.query("SELECT Purchases.Purchases_ID, Purchases.Shop, Purchases.ProductID, Purchases.Quantity, Purchases.CostPerItem, DATE_FORMAT(Purchases.Date, '%Y-%m-%d') as Date from Purchases WHERE Purchases_ID = ?", [id], function(err, purchases){
+				if(err) return next(err);
+				var purchase = purchases[0];
+				showEdit(req, res, purchase);
+			});
+	});
+
+	// res.render('edit_purchases', {user: req.session.user,
+	// 	is_admin: req.session.user.is_admin,
+	// 	data : data
+	// });
+
+};
+
+const showEdit = function(req, res, purchase){
+	var id = req.params.Purchases_ID;
+	req.getConnection(function(err, connection){
+		connection.query('SELECT * FROM Products', [], function(err,products){
+			if(err) return next(err);
+				products = products.map(function(product){
+					product.selected = product.Product_ID === Number(purchase.ProductID) ? "selected" : "";
+					return product;
+				});
+				res.render('edit_purchases', {
+					user: req.session.user,
+					is_admin: req.session.user.is_admin,
+					products : products,
+					data : purchase
+				});
+		});
 	});
 }
+
+const showError = function(req, res, data){
+	var data = req.body;
+	var id = req.params.Purchases_ID;
+	showEdit(req, res, data);
+}
+
 exports.update = function(req, res, next){
 	var moment = require('moment');
 	moment().format();
@@ -95,7 +131,7 @@ exports.update = function(req, res, next){
 		error = true;
 	}
 	if(error){
-		return showEditScreen(req, res, data, id);
+		return showError(req, res, data);
 	}
 	req.getConnection(function(err, connection){
 			connection.query('UPDATE Purchases SET ? WHERE Purchases_ID = ?', [data, id], function(err, data){
