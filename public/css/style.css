@@ -249,7 +249,7 @@ fieldset{
   float: left;
   margin-right: .5em;
 }
-select { text-indent: 270px; }
+select { text-align: center !important; }
 
 .radio .cr {
   border-radius: 50%;
