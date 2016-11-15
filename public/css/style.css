@@ -213,7 +213,7 @@ body {
 }
 
 .card.hovercard .cardheader {
-    background: url("/img/k.jpg");
+    background: url("/img/krc.jpg");
     background-size: cover;
     height: 135px;
 }
@@ -355,9 +355,9 @@ a.socialIcon:hover, .socialHoverClass {
   font-weight:bold;
   color : lightblue;
 }
-.thin{
+/*.thin{
   font-size: 25px;
-}
+}*/
 .text-success{
   color: #41EE80 !important;
 }
@@ -754,21 +754,22 @@ table {
 }
 
 .btn-danger {
-  background-color: #044052 !important;
-  border-radius: 50px !important;
+  background-color: rgba(136, 5, 5, 0.13) !important;
+  /*border-radius: 03px !important;*/
   border: 1px solid white !important;
 }
 
 .btn-warning {
-  background-color: #044052 !important;
+  background-color: rgba(7, 128, 167, 0.13) !important;
   border-radius: 0px !important;
   border: 1px solid white !important;
 }
 
 .btn-success {
-  background-color: #044052 !important;
+  background-color: rgba(7, 179, 75, 0.13) !important;
   border-radius: 0px !important;
-  border: 1px solid white !important;
+  /*border: 1px solid white !important;*/
+  float: right;
 }
 
 .btn-primary {

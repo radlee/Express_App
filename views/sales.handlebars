@@ -20,10 +20,9 @@
         <th id="table1">Product Name</th>
         {{#if is_admin}}
         <th id="table1"></th>
-        <th id="table1"><a style="color:white" class="btn btn-success btn-block" href="/sales/add">
-          <span class="glyphicon glyphicon-plus"></span> Add a Sale
-        </a>
-      </th>
+        <th id="table1"><a style="color:white" class="btn btn-success" href="/sales/add" data-toggle="tooltip" data-placement="left" title="Add a Sale!">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a></th>
       {{else}}
         <th id="table1"></th>
       {{/if}}

@@ -60,7 +60,7 @@
 
 	        <li class="dropdown active">
 						{{#if user}}
-	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Week
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#" data-toggle="tooltip" data-placement="bottom" title="Select a Week!">Weekly Statistics
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/Week1">Week 1</a></li>
@@ -117,4 +117,9 @@ $.backstretch(["/img/code.jpg"]);
 <script src="/js/scripts.js"></script>
 <!-- Main JS -->
 <script src="/js/searchScript.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 </html>
