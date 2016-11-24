@@ -38,14 +38,11 @@
       </thead>
       <tbody class="results">
 
-        {{#categories}}
+    {{#categories}}
         <tr id="table1">
         <td id="table1" name="Category" value="{{id}}" href="/categories/delete/{{id}}" >{{Category}}</td>
         {{#if ../is_admin}}
-        <t  <!-- <a id="button" class=btn name=submit value=Login type=submit
-            onclick="checkBoxDemo()">
-            <span class="glyphicon glyphicon-trash"></span> Delete selected
-          </a> -->d id="table1" class="para">
+        <td id="table1" class="para">
           <strong>
             <span style="color:#00adc8">
               <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">

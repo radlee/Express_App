@@ -31,6 +31,10 @@ body {
 #feed a{
   color: rgb(0, 255, 184) !important;
   font-size: 20px !important;
+  text-decoration: none;
+}
+#feed a:hover{
+  color: rgb(6, 235, 245) !important;
 
 }
 

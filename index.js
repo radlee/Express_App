@@ -25,7 +25,7 @@ var dbOptions = {
       host: 'localhost',
       user: 'root',
       password: 'Leander247365',
-      port: 5000,
+      port: 3306,
       database: 'Nelisa'
 };
 
