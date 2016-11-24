@@ -16,6 +16,24 @@ body {
     text-align: center;
 }
 
+
+#feed{
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  text-align:center;
+  color: white;
+}
+#feed >p{
+  color: yellow;
+  text-align: left !important;
+}
+#feed a{
+  color: rgb(0, 255, 184) !important;
+  font-size: 20px !important;
+
+}
+
 /*Profile Card*/
 
 
@@ -799,7 +817,8 @@ td {
 }
 
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {
-  background-color: #008080 !important;
+  /*background-color: #008080 !important;*/
+  background-color: rgba(0,128,128,0.13) !important;
 }
 
 .dropdown-menu {

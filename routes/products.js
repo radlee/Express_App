@@ -67,16 +67,31 @@ exports.update = function(req, res, next){
 		CategoryID : Number(req.body.CategoryID),
 		Product : req.body.Product,
 	};
-  	var id = req.params.Product_ID;
-  	req.getConnection(function(err, connection){
+	var id = req.params.Product_ID;
+	req.getConnection(function(err, connection){
 		if (err) return next(err);
 		connection.query('UPDATE Products SET ? WHERE Product_ID = ?', [data, id], function(err, rows){
 			if (err) return next(err);
-      		res.redirect('/products');
-				});
+			res.redirect('/products');
+		});
+	});
+};
+exports.search = function(req, res, next) {
+	req.getConnection(function(err, connection) {
+		if (err) return next(err);
+		var value = '%' + req.body.value + '%';
+		console.log(value);
+		// select products.id, products.description as product_name, categories.description as category_name from products inner join categories on products.category_id = categories.id where products.description  like ? or categories.description like ?'
+		connection.query('SELECT Products.Product_ID, Products.Product, Categories.Category from Products inner join Categories on Products.CategoryID = Categories.id where Products.Product ? or Categories.Category like ?',value, function(err, results) {
+			console.log(results);
+			if (err) return next(err);
+			res.render('productUpdate', {
+				products: results,
+				layout: false
 			});
-		};
-
+		});
+	});
+};
 exports.delete = function(req, res, next){
 	var ids = [];
 	var id = req.params.id;

@@ -62,6 +62,24 @@ exports.update = function(req, res, next){
     });
 };
 
+exports.search = function(req, res, next) {
+  req.getConnection(function(err, connection) {
+
+    if (err) return next(err);
+    var value = '%' + req.body.value + '%';
+    connection.query('SELECT * FROM Categories WHERE Category like ?',value, function(err, results) {
+      if (err) return next(err);
+      res.render('categoryUpdate', {
+       categories: results,
+       layout: false
+		 });
+	 });
+ });
+};
+
+
+
+
 // exports.delete = function(req, res, next){
 // 	var id = req.params.id;
 // 	console.log(id);

@@ -1,0 +1,46 @@
+<div id="output">
+  <div class="table-responsive">
+    <div>
+    <table style="width:100%" class="table table-hover results">
+      <thead>
+        <tr id="table1" id="Heading">
+          <th id="table1">Category Name</th>
+          <th id="table1"></th>
+          <th id="table1"></th>
+          <th id="table1">
+          <P>
+            <INPUT id="remove" class="btn btn-raised btn-warning" name=submit value="Delete Selected" type=submit onclick="checkBoxDemo()">
+            </P>
+          </th>
+        </tr>
+        <tr id="table1" class="warning no-result">
+          <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
+        </tr>
+      </thead>
+      <tr id="table1">
+        {{#categories}}
+        <td id="table1" class="results" name="Category" value="{{id}}" href="/categories/delete/{{id}}" >{{Category}}</td>
+        <td id="table1" class="para">
+          <strong>
+            <span style="color:#00adc8">
+              <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+              </a>
+            </span>
+          </strong>
+        </td>
+        <td id="table1" class="para">
+          <div class="checkbox">
+            <label>
+              <input id="checked" class="value" type="checkbox" name="Category" value="{{id}}">
+              <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            </label>
+          </div>
+        </td>
+        <td id="table1"></td>
+      </tr>
+      {{/categories}}
+    </table>
+  </div>
+  </div>
+</div>

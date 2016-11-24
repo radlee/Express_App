@@ -1,0 +1,43 @@
+<h1>Latest Technology News </h1>
+
+<div id="feed"class="row">
+
+</div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    // google.load("feeds", "1");
+    // function initialize() {
+    //   var feed = new google.feeds.Feed("http://feeds.abcnews.com/abcnews/technologyheadlines");
+    //   feed.load(function(result) {
+    //     if (!result.error) {
+    //       var container = document.getElementById("feed");
+    //       for (var i = 0; i < result.feed.entries.length; i++) {
+    //         var entry = result.feed.entries[i];
+    //
+    //         var div = document.createElement("div");
+    //         var p = document.createElement("a");
+    //         p.id = "red";
+    //         div.appendChild(document.createTextNode(entry.title));
+    //         p.appendChild(document.createTextNode(entry.content));
+    //         p.setAttribute('href', entry.link);
+    //         container.appendChild(div);
+    //         container.appendChild(p);
+    //       }
+    //     }
+    //   });
+    // }
+    // google.setOnLoadCallback(initialize);
+
+$(document).ready(function(){
+  var url = "xkcd.com/info.0.json";
+  $.ajax(url, {
+    url: url,
+    method: 'GET',
+  }).done(function(result) {
+    console.log(result);
+}).fail(function(err) {
+  throw err;
+});
+})
+    </script>

@@ -12,6 +12,7 @@ var express = require('express'),
     products = require('./routes/products'),
     sales = require('./routes/sales'),
     purchases = require('./routes/purchases'),
+    purchases = require('./routes/purchases'),
     users = require('./routes/users'),
     stats = require('./routes/stats'),
     mid = require('./middleware'),
@@ -24,7 +25,7 @@ var dbOptions = {
       host: 'localhost',
       user: 'root',
       password: 'Leander247365',
-      port: 3306,
+      port: 5000,
       database: 'Nelisa'
 };
 
@@ -135,6 +136,12 @@ app.get("/home", checkUser, function(req, res) {
     is_admin: req.session.user.is_admin
   })
 });
+app.get("/news", checkUser, function(req, res) {
+  res.render("news", {
+    user: req.session.user,
+    is_admin: req.session.user.is_admin
+  })
+});
 
 //Why not ideal ? |-----Delete the User----|
 app.get("/logout", function(req, res) {
@@ -154,12 +161,16 @@ app.post('/categories/update/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, ca
 app.post('/categories/add',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.add);
 app.get('/categories/check/:id',mid.requiresLogin,mid.requiresLoginAsAdmin, categories.check);
 
+app.post('/categories/search/', categories.search);
+
 app.get('/products',mid.requiresLogin, products.show);
 app.get('/products/edit/:Product_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, products.get);
 app.post('/products/update/:Product_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, products.update);
 app.get('/products/add',mid.requiresLogin,mid.requiresLoginAsAdmin, products.showAdd);
 app.post('/products/add',mid.requiresLogin,mid.requiresLoginAsAdmin, products.add);
 app.get('/products/delete/:Product_ID',mid.requiresLogin,mid.requiresLoginAsAdmin, products.delete);
+
+app.post('/products/search/', products.search);
 
 app.get('/sales',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.show);
 app.get('/sales/add',mid.requiresLogin,mid.requiresLoginAsAdmin, sales.showAdd);

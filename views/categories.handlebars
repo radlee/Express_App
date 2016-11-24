@@ -1,17 +1,17 @@
 <div id="csricodexmlab" class="container-fluid bg-3 text-center jumbotron">
     <h2 id="csricodexmlab_text" class="margin">Categories</h2>
 </div>
-
 <div id="output">
-  <a id="table1" style="color:white" class="btn btn-success" href="/categories/add">
-    <span class="glyphicon glyphicon-plus"></span> Add a Category
-  </a>
   <p></p>
   <div class="table-responsive">
     <div class=" pull-left">
       <input type="text" id="form-control" class="search form-control" placeholder="What you looking for?">
       <span class="counter pull"></span>
     </div>
+    <a id="table1" style="color:white" class="btn btn-success" href="/categories/add">
+      <span class="glyphicon glyphicon-plus"></span> Add a Category
+    </a>
+    <div>
     <table style="width:100%" class="table table-hover results">
       <thead>
         <tr id="table1" id="Heading">
@@ -26,7 +26,7 @@
           </a> -->
           <P>
             <INPUT id="remove" class="btn btn-raised btn-warning" name=submit value="Delete Selected" type=submit onclick="checkBoxDemo()">
-            </P>
+          </P>
           </th>
           {{else}}
           <th id="table1"></th>
@@ -36,11 +36,16 @@
           <td id="table1" colspan="4"><i class="fa fa-warning"></i> No result</td>
         </tr>
       </thead>
-      <tr id="table1">
+      <tbody class="results">
+
         {{#categories}}
+        <tr id="table1">
         <td id="table1" name="Category" value="{{id}}" href="/categories/delete/{{id}}" >{{Category}}</td>
         {{#if ../is_admin}}
-        <td id="table1" class="para">
+        <t  <!-- <a id="button" class=btn name=submit value=Login type=submit
+            onclick="checkBoxDemo()">
+            <span class="glyphicon glyphicon-trash"></span> Delete selected
+          </a> -->d id="table1" class="para">
           <strong>
             <span style="color:#00adc8">
               <a type="button" class="btn btn-warning" href="/categories/edit/{{id}}">
@@ -63,7 +68,12 @@
         {{/if}}
       </tr>
       {{/categories}}
+
+
+      </tbody>
+
     </table>
+  </div>
   </div>
 </div>
 
@@ -74,6 +84,24 @@ $(document).ready(function () {
         $('table tr').has('input[name="Category"]:checked').remove()
     })
 });
+
+$(document).ready(function() {
+  $(".search").keyup(function () {
+    var searchTerm = $(".search").val();
+    var url = '/categories/search';
+    $.ajax(url, {
+      data : {
+        value : searchTerm
+      },
+      type : 'POST',
+      success : function(response){
+        console.log(response);
+        $(".results").html(response);
+      }
+    });
+  });
+});
+
 </script>
 
 {{#no_categories}}
