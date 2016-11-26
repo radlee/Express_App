@@ -82,7 +82,7 @@ exports.search = function(req, res, next) {
 		var value = '%' + req.body.value + '%';
 		console.log(value);
 		// select products.id, products.description as product_name, categories.description as category_name from products inner join categories on products.category_id = categories.id where products.description  like ? or categories.description like ?'
-		connection.query('SELECT Products.Product_ID, Products.Product, Categories.Category from Products inner join Categories on Products.CategoryID = Categories.id where Products.Product ? or Categories.Category like ?',value, function(err, results) {
+		connection.query('SELECT * from Products where Product like ?',value, function(err, results) {
 			console.log(results);
 			if (err) return next(err);
 			res.render('productUpdate', {
