@@ -17,10 +17,10 @@ body {
 }
 
 #feed{
-  font-size: 30px;
+  font-size: 20px;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 40px;
-  text-align:center;
+  text-align:left;
   color: white;
 }
 #facebook{
@@ -35,7 +35,7 @@ body {
 }
 #feed a{
   color: rgb(0, 255, 184) !important;
-  font-size: 20px !important;
+  font-size: 15px !important;
   text-decoration: none;
 }
 #feed a:hover{
