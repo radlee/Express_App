@@ -136,11 +136,8 @@ app.get("/home", checkUser, function(req, res) {
     is_admin: req.session.user.is_admin
   })
 });
-app.get("/news", checkUser, function(req, res) {
-  res.render("news", {
-    user: req.session.user,
-    is_admin: req.session.user.is_admin
-  })
+app.get("/news", function(req, res) {
+  res.render("news")
 });
 
 //Why not ideal ? |-----Delete the User----|
