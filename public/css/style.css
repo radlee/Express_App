@@ -30,7 +30,7 @@ body {
   color: white;
 }
 #feed >p{
-  color: yellow;
+  color: rgb(255, 0, 92);
   text-align: left !important;
 }
 #feed a{
