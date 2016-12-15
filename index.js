@@ -193,7 +193,7 @@ app.get('/users/delete/:user_id',mid.requiresLogin,mid.requiresLoginAsAdmin, use
 app.get('/:week_name',mid.requiresLogin, stats.show);
 app.use(errorHandler);
 
-var portNumber = process.env.CRUD_PORT_NR || 5000;
+var portNumber = process.env.CRUD_PORT_NR || 5007;
 app.listen(portNumber, function () {
   console.log('Server listening on:', portNumber);
 });
