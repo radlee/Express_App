@@ -1,40 +1,15 @@
-<h1 style="color:white">Latest Technology News </h1>
+<h1 style="color:white"> Social Windows </h1>
 
 
-<div class="row">
+<div class="row-tweets">
+  <div class="col-xs-3">
+  </div>
   <div class="col-xs-6">
     <a class="twitter-timeline" data-theme="light" href="https://twitter.com/101LEANDER">Tweets by 101LEANDER</a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
-  <div id="feed" class="col-xs-6">
+  <div class="col-xs-3">
+    <a class="twitter-timeline" data-theme="light" href="https://twitter.com/101LEANDER">Tweets by 101LEANDER</a>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
 </div>
-
-
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-    google.load("feeds", "1");
-    function initialize() {
-      var feed = new google.feeds.Feed("http://feeds.abcnews.com/abcnews/technologyheadlines");
-      feed.load(function(result) {
-        if (!result.error) {
-          var container = document.getElementById("feed");
-          for (var i = 0; i < result.feed.entries.length; i++) {
-            var entry = result.feed.entries[i];
-
-            var div = document.createElement("div");
-            var p = document.createElement("a");
-            p.id = "red";
-            div.appendChild(document.createTextNode(entry.title));
-            p.appendChild(document.createTextNode(entry.content));
-            p.setAttribute('href', entry.link);
-            container.appendChild(div);
-            container.appendChild(p);
-          }
-        }
-      });
-    }
-    google.setOnLoadCallback(initialize);
-
-    </script>

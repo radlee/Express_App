@@ -16,6 +16,11 @@ body {
     text-align: center;
 }
 
+.row-tweets{
+  background-color: yellow;
+  margin: auto !important;
+}
+
 #feed{
   font-size: 20px;
   background-color: rgba(0, 0, 0, 0.8);

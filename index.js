@@ -24,7 +24,7 @@ var express = require('express'),
 var dbOptions = {
       host: 'localhost',
       user: 'root',
-      password: 'Leander247365',
+      password: 'password',
       port: 3306,
       database: 'Nelisa'
 };
@@ -138,6 +138,9 @@ app.get("/home", checkUser, function(req, res) {
 });
 app.get("/news", function(req, res) {
   res.render("news")
+});
+app.get("/contact", function(req, res) {
+  res.render("contact")
 });
 
 //Why not ideal ? |-----Delete the User----|

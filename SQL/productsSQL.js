@@ -7,7 +7,7 @@ var getProductNamesAndCategoryNames = require("../Modules/getProductNamesAndCate
 var connection = mysql.createConnection({
   host : 'localhost',
   user : 'root',
-  password : "Leander247365",
+  password : "password",
   database : "Nelisa"
 });
 // connection.connect();
